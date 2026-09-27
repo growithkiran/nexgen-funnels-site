@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="logo-mark.svg" type="image/svg+xml">
+<title>Live demo — NexGen Funnels</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:#0E1115;color:#F3F6F5;font-family:'Hanken Grotesk',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#F4A07F}a:hover{color:#fff}
+h1,h2,h3,p,dl,dd{margin:0}
+button{font:inherit}
+:focus-visible{outline:2px solid #C8401A;outline-offset:3px;border-radius:8px}
+.pvp{--ink:#F3F6F5;--ink2:rgba(243,246,245,.78);--muted:rgba(243,246,245,.62);--line:rgba(243,246,245,.14);--accent:#C8401A;--accent-soft:#F4A07F;position:relative;isolation:isolate;overflow:clip;min-height:100vh;display:flex;flex-direction:column;background:linear-gradient(180deg,#0E1115 0%,#121A1E 55%,#172528 100%);color:var(--ink)}
+.pvp::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(rgba(243,246,245,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(243,246,245,.04) 1px,transparent 1px);background-size:36px 36px;-webkit-mask-image:radial-gradient(ellipse 80% 50% at 50% 0%,#000 20%,transparent 75%);mask-image:radial-gradient(ellipse 80% 50% at 50% 0%,#000 20%,transparent 75%)}
+.pvp::after{content:"";position:absolute;z-index:-1;pointer-events:none;width:900px;height:620px;left:50%;margin-left:-450px;bottom:-460px;border-radius:50%;filter:blur(120px);background:rgba(200,64,26,.4)}
+.wrap{width:100%;max-width:1440px;margin:0 auto;padding:0 32px}
+
+/* top bar */
+.pv-top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;min-height:76px}
+.pv-back{justify-self:start;display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 16px 0 12px;border-radius:999px;border:1px solid var(--line);color:var(--ink);font-weight:600;font-size:15px;text-decoration:none;transition:background-color .2s ease,border-color .2s ease}
+.pv-back:hover{color:#fff;background:rgba(243,246,245,.06);border-color:rgba(243,246,245,.3)}
+.pv-title{display:flex;flex-direction:column;align-items:center;text-align:center;gap:3px}
+.pv-title h1{font-family:'Newsreader',Georgia,serif;font-weight:300;font-size:26px;line-height:1.1;letter-spacing:-.02em}
+.pv-title p{font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.btn{justify-self:end;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:0 20px;border-radius:999px;background:#F3F6F5;color:#0E1316;font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap;transition:background-color .2s ease,color .2s ease}
+.btn:hover{background:var(--accent);color:#fff}
+
+/* mac window */
+.pv-win{display:flex;flex-direction:column;border-radius:18px;overflow:clip;background:#15191C;border:1px solid rgba(243,246,245,.14);box-shadow:0 60px 120px -40px rgba(0,0,0,.8)}
+.pv-bar{display:flex;align-items:center;gap:14px;min-height:54px;padding:0 14px;border-bottom:1px solid rgba(243,246,245,.08);background:#1A1F22}
+.pv-dots{display:flex;gap:8px;flex:none}
+.pv-dots span{width:12px;height:12px;border-radius:50%;background:#FF5F57}
+.pv-dots span:nth-child(2){background:#FEBC2E}
+.pv-dots span:nth-child(3){background:#28C840}
+.pv-nav{display:flex;gap:2px;flex:none}
+.ib{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border:0;border-radius:10px;background:transparent;color:rgba(243,246,245,.7);cursor:pointer;text-decoration:none}
+.ib:hover{background:rgba(243,246,245,.08);color:#fff}
+.ib[aria-disabled="true"]{opacity:.35;cursor:default}
+.pv-url{flex:1;min-width:0;display:flex;align-items:center;justify-content:center;gap:8px;height:36px;padding:0 16px;border-radius:10px;background:rgba(243,246,245,.06);color:rgba(243,246,245,.7);font-size:13.5px}
+.pv-url span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pv-live{display:inline-flex;align-items:center;gap:6px;margin-left:6px;height:22px;padding:0 9px;border-radius:999px;background:rgba(40,200,64,.14);color:#8BE39A;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;flex:none}
+.pv-live::before{content:"";width:6px;height:6px;border-radius:50%;background:#28C840}
+.pv-seg{display:flex;gap:2px;padding:3px;border-radius:12px;background:rgba(243,246,245,.06);flex:none}
+.pv-seg button{display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:0 13px;border:0;border-radius:9px;background:transparent;color:rgba(243,246,245,.7);font-weight:600;font-size:13.5px;cursor:pointer;transition:background-color .2s ease,color .2s ease}
+.pv-seg button:hover{color:#fff}
+.pv-seg button.is-on{background:#F3F6F5;color:#0E1316}
+
+/* stage */
+.pv-stage{position:relative;height:max(560px,calc(100vh - 260px));background-color:#0B0F11;background-image:radial-gradient(rgba(243,246,245,.07) 1px,transparent 1px);background-size:20px 20px}
+.pv-desk{position:absolute;inset:0}
+.pv-phone{position:absolute;top:24px;bottom:0;left:50%;width:406px;margin-left:-203px;padding:8px 8px 0;border-radius:46px 46px 0 0;background:#262C2F;border:1px solid rgba(243,246,245,.2);border-bottom:0;box-shadow:0 40px 80px -30px rgba(0,0,0,.8)}
+.pv-screen{position:relative;height:100%;border-radius:38px 38px 0 0;overflow:clip;background:#0B0F11}
+.live-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:32px;text-align:center;background-color:#141A1D;background-image:repeating-linear-gradient(135deg,rgba(243,246,245,.05) 0 1px,transparent 1px 12px)}
+.live-ph b{font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#8BE39A}
+.live-ph h2{font-family:'Newsreader',Georgia,serif;font-weight:300;font-size:34px;line-height:1.1;letter-spacing:-.02em;max-width:18ch}
+.pv-phone .live-ph h2{font-size:24px}
+.live-ph p{max-width:30em;font-size:15.5px;line-height:1.55;color:var(--muted)}
+.live-ph a{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:600;font-size:15px}
+
+/* info */
+.pv-info{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);gap:32px;margin:28px auto 0;padding:28px 32px;border:1px solid var(--line);border-radius:22px;background:rgba(243,246,245,.04)}
+.lbl{font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.pv-info p{font-size:15.5px;line-height:1.55;color:var(--ink2)}
+.pv-info dd{font-size:15.5px;line-height:1.45}
+.pv-info .lbl{font-size:11.5px;line-height:1.4;color:var(--muted)}
+
+@media (max-width:900px){
+.pv-top{grid-template-columns:1fr auto;padding-top:8px}
+.pv-title{grid-column:1 / -1;grid-row:2;align-items:flex-start;text-align:left;padding-bottom:12px}
+.pv-info{grid-template-columns:repeat(2,minmax(0,1fr))}
+.pv-url{display:none}
+}
+@media (max-width:600px){
+.wrap{padding:0 12px}
+.pv-back span{display:none}
+.pv-nav{display:none}
+.pv-bar{gap:8px;padding:0 10px}
+.pv-seg button{padding:0 11px}
+.pv-seg button span{display:none}
+.pv-stage{height:calc(100vh - 210px);min-height:480px}
+.pv-phone{width:auto;left:12px;right:12px;margin-left:0;top:14px;border-radius:36px 36px 0 0}
+.pv-screen{border-radius:30px 30px 0 0}
+.pv-info{grid-template-columns:minmax(0,1fr);gap:18px;padding:22px}
+}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{transition:none !important;animation:none !important}}
+
+[hidden]{display:none !important}
+.pv-desk{overflow:hidden}
+.pv-desk iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent}
+.pv-screen iframe{position:absolute;top:0;left:0;width:390px;border:0;background:transparent;transform-origin:0 0}
+.pv-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(243,246,245,.45)}
+.pv-missing{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:32px;text-align:center}
+.pv-missing h2{font-family:'Newsreader',Georgia,serif;font-weight:300;font-size:32px}
+.pv-missing p{color:rgba(243,246,245,.62)}
+</style>
+</head>
+<body>
+<div class="pvp">
+<header class="wrap pv-top">
+<a class="pv-back" href="index.html#demos"><svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M14.5 9h-11M8 4.5L3.5 9 8 13.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>All live demos</span></a>
+<div class="pv-title"><h1 id="pName">Live demo</h1><p id="pMeta"></p></div>
+<a class="btn" href="https://wa.me/919113290223" target="_blank" rel="noopener" data-book>Book a Call</a>
+</header>
+
+<main class="wrap">
+<div class="pv-win">
+<div class="pv-bar">
+<span class="pv-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+<div class="pv-nav">
+<a class="ib" href="index.html#demos" aria-label="Back to all demos"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+<button type="button" class="ib" aria-label="Forward" aria-disabled="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<button type="button" class="ib" id="reload" aria-label="Reload the live site"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8a5 5 0 11-1.5-3.6M13 2.5v3h-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+</div>
+<div class="pv-url"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="currentColor" stroke-width="1.4"></rect><path d="M5.5 7V5a2.5 2.5 0 015 0v2" stroke="currentColor" stroke-width="1.4"></path></svg><span id="pDomain"></span><span class="pv-live" id="pLive">Live</span></div>
+<div class="pv-seg" role="group" aria-label="Preview size">
+<button type="button" class="is-on" aria-pressed="true" data-device="desktop"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"></rect><path d="M5.5 14h5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg><span>Desktop</span></button>
+<button type="button" aria-pressed="false" data-device="mobile"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="4.5" y="1.5" width="7" height="13" rx="1.8" stroke="currentColor" stroke-width="1.4"></rect><path d="M7 12h2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg><span>Mobile</span></button>
+</div>
+<a class="ib" id="pOpen" href="#" target="_blank" rel="noopener" aria-label="Open the live site in a new tab"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M7.5 3.5H4A1.5 1.5 0 002.5 5v9A1.5 1.5 0 004 15.5h9a1.5 1.5 0 001.5-1.5v-3.5M10.5 2.5h5v5M15.5 2.5L8.5 9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+</div>
+
+<div class="pv-stage" id="stage">
+<div class="pv-desk" id="desk"><div class="pv-loading">Loading the live site…</div></div>
+<div class="pv-phone" id="phone" hidden><div class="pv-screen" id="screen"><div class="pv-loading">Loading…</div></div></div>
+</div>
+</div>
+
+<section class="pv-info" aria-label="About this project">
+<div><p class="lbl">About the project</p><p id="pAbout"></p></div>
+<dl><dt class="lbl">Category</dt><dd id="pCat"></dd></dl>
+<dl><dt class="lbl">My role</dt><dd id="pRole"></dd></dl>
+<dl><dt class="lbl">Type</dt><dd id="pType"></dd></dl>
+</section>
+</main>
+<div style="height: 48px"></div>
+</div>
+<script>
+/* ── EDIT HERE ─────────────────────────────────────── */
+const BOOKING_URL = 'https://wa.me/919113290223';   // ← WhatsApp link used by every "Book a Call" button
+// One entry per live demo. The key is what goes after ?p= in the link (project.html?p=flowpilot).
+const PROJECTS = {
+  aara: {
+    name: 'Studio Aara',
+    url: 'https://darkgray-partridge-447437.hostingersite.com/',
+    category: 'Website', type: 'Interior design', role: 'Strategy, design & build',
+    about: 'A website for a Bengaluru studio creating considered, personal residential interiors — projects, services, process and a clear path to book a design consultation.'
+  },
+  nurture: {
+    name: 'Nurture',
+    url: 'https://darkcyan-crow-807664.hostingersite.com/',
+    category: 'Landing page', type: 'Wellness', role: 'Strategy, design & build',
+    about: 'A landing page for a gentle fertility wellness program — movement, breathwork, relaxation and mindful connection — guiding visitors to explore the program.'
+  },
+  flowpilot: {
+    name: 'FlowPilot AI',
+    url: 'https://limegreen-lyrebird-874389.hostingersite.com/',
+    category: 'Landing page', type: 'Concept study', role: 'Everything — strategy, copy, design and build',
+    about: 'A landing page for a service that builds practical AI automation for growing businesses — explaining the problem, what gets automated and how it works, and leading visitors to book a free automation audit.'
+  },
+  kusum: {
+    name: 'Kusum Yoga',
+    url: 'https://violet-bear-656585.hostingersite.com/',
+    category: 'Sales funnel', type: 'Fertility yoga', role: 'Strategy, design & build',
+    about: 'A funnel for live online fertility yoga for couples, built to turn interested visitors into WhatsApp conversations.'
+  },
+  sukha: {
+    name: 'Sukha Fertility Yoga',
+    url: 'https://fertility-yoga-sales-landing-560589.hostingersite.com/',
+    category: 'Sales page', type: 'Yoga program', role: 'Strategy, design & build',
+    about: 'A sales page for a gentle 30-day fertility yoga program — live yoga, breathwork and hormone-balancing flows on a simple monthly membership.'
+  }
+  // , nextproject: { name: '…', url: 'https://…', category: '…', type: '…', role: '…', about: '…' }
+};
+/* ──────────────────────────────────────────────────── */
+document.querySelectorAll('[data-book]').forEach(a => { a.href = BOOKING_URL; });
+const $ = id => document.getElementById(id);
+const key = new URLSearchParams(location.search).get('p') || 'flowpilot';
+const p = PROJECTS[key];
+const desk = $('desk'), phone = $('phone'), screen = $('screen');
+let device = 'desktop', fDesk = null, fMob = null;
+
+if (!p || !p.url) {
+  document.title = 'Demo not found — NexGen Funnels';
+  $('pName').textContent = 'Demo not found';
+  desk.innerHTML = '<div class="pv-missing"><h2>This demo isn’t available.</h2><p>Head back to the gallery to pick another project.</p><a class="btn" href="index.html#demos">All live demos</a></div>';
+  $('pLive').hidden = true; $('pOpen').hidden = true; document.querySelector('.pv-info').hidden = true;
+} else {
+  document.title = p.name + ' — Live demo · NexGen Funnels';
+  $('pName').textContent = p.name;
+  $('pMeta').textContent = p.category + ' · ' + p.type;
+  $('pDomain').textContent = p.url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+  $('pOpen').href = p.url;
+  $('pAbout').textContent = p.about; $('pCat').textContent = p.category; $('pRole').textContent = p.role; $('pType').textContent = p.type;
+  fDesk = frame(p.name + ' — live desktop preview'); desk.appendChild(fDesk); fDesk.src = p.url;
+}
+function frame(title) {
+  const f = document.createElement('iframe');
+  f.title = title; f.setAttribute('allow', 'fullscreen'); f.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+  return f;
+}
+function fitPhone() {
+  if (!fMob) return;
+  const s = screen.clientWidth / 390;
+  fMob.style.transform = 'scale(' + s + ')'; fMob.style.height = (screen.clientHeight / s) + 'px';
+}
+new ResizeObserver(fitPhone).observe(screen);
+document.querySelectorAll('.pv-seg button').forEach(b => b.addEventListener('click', () => {
+  device = b.dataset.device;
+  document.querySelectorAll('.pv-seg button').forEach(x => { const on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-pressed', String(on)); });
+  desk.hidden = device !== 'desktop'; phone.hidden = device !== 'mobile';
+  if (device === 'mobile' && p && p.url && !fMob) { fMob = frame(p.name + ' — live mobile preview'); screen.appendChild(fMob); fMob.src = p.url; }
+  fitPhone();
+}));
+$('reload').addEventListener('click', () => { const f = device === 'desktop' ? fDesk : fMob; if (f) f.src = f.src; });
+</script>
+</body>
+</html>
