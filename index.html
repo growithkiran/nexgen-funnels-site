@@ -1194,7 +1194,23 @@ document.querySelectorAll('[data-mini]').forEach(box => {
         function active() { return m.k > .005 || m.tk > 0 || ripples.length; }
         function loop(now) { var dt = Math.min(.05, (now - (last || now)) / 1000); last = now; draw(dt); if (vis && active()) raf = requestAnimationFrame(loop); else { run = false; draw(0); } }
         function kick() { if (!run && vis) { run = true; last = 0; raf = requestAnimationFrame(loop); } }
-        function mv(e) { var r = cv.getBoundingClientRect(); m.tx = e.clientX - r.left; m.ty = e.clientY - r.top; if (m.k < .01) { m.x = m.tx; m.y = m.ty; } m.tk = 1; kick(); }
+        // is the pointer over actual letters? (glyph-level, so empty space beside a short line still reacts)
+        function onText(x, y) {
+          var el = document.elementFromPoint(x, y); if (!el || !sec.contains(el)) return false;
+          if (el.closest('input,textarea,select')) return true;
+          var node, off;
+          if (document.caretPositionFromPoint) { var p = document.caretPositionFromPoint(x, y); if (p) { node = p.offsetNode; off = p.offset; } }
+          else if (document.caretRangeFromPoint) { var cr = document.caretRangeFromPoint(x, y); if (cr) { node = cr.startContainer; off = cr.startOffset; } }
+          if (!node || node.nodeType !== 3 || !sec.contains(node)) return false;
+          var len = node.length, rg = document.createRange(), PAD = 6;
+          for (var i = Math.max(0, off - 1); i <= Math.min(len - 1, off); i++) {
+            rg.setStart(node, i); rg.setEnd(node, i + 1);
+            var rs = rg.getClientRects();
+            for (var j = 0; j < rs.length; j++) { var b = rs[j]; if (x >= b.left - PAD && x <= b.right + PAD && y >= b.top - PAD && y <= b.bottom + PAD) return true; }
+          }
+          return false;
+        }
+        function mv(e) { var r = cv.getBoundingClientRect(); m.tx = e.clientX - r.left; m.ty = e.clientY - r.top; if (m.k < .01) { m.x = m.tx; m.y = m.ty; } m.tk = onText(e.clientX, e.clientY) ? 0 : 1; kick(); }
         function lv() { m.tk = 0; kick(); }
         function ripple(x, y) { if (still) return; ripples.push({ x: x, y: y, r: 0, v: 520, max: Math.max(W, 600) * .9, a: 1 }); kick(); }
         function tap(e) { var r = cv.getBoundingClientRect(); ripple(e.clientX - r.left, e.clientY - r.top); }
