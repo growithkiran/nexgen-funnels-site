@@ -556,6 +556,12 @@ html{scroll-behavior:auto}
 .cp-av{width:60px;height:60px}
 }
 
+/* ── reactive dot field (light sections) ── */
+canvas.df{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block}
+.lite:has(> canvas.df)::before{display:none}
+.lite > canvas.df ~ .hl-layer{display:none}
+.lite > .wrap{position:relative;z-index:1}
+
 [hidden]{display:none !important}
 .dm-mini{position:absolute;inset:0;overflow:hidden;pointer-events:none}
 .dm-mini iframe{position:absolute;top:0;left:0;width:1440px;height:900px;border:0;transform-origin:0 0;opacity:0;transition:opacity .6s ease}
@@ -616,6 +622,7 @@ html{scroll-behavior:auto}
 
 <!-- 2 · PROBLEM + DIFFERENCE -->
 <section class="sec lite" aria-labelledby="pb-h">
+<canvas class="df" aria-hidden="true"></canvas>
 <div class="hl-layer" aria-hidden="true"><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span></div>
 <div class="wrap">
 <div class="sh">
@@ -665,6 +672,7 @@ html{scroll-behavior:auto}
 
 <!-- 3 · RECENT WORK (portfolio) -->
 <section class="sec tint lite" aria-labelledby="work-h">
+<canvas class="df" aria-hidden="true"></canvas>
 <div class="hl-layer" aria-hidden="true"><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span></div>
 <div class="wrap">
 <div class="sh">
@@ -729,6 +737,7 @@ html{scroll-behavior:auto}
 
 <!-- 5 · LIVE DEMOS (gallery → project viewer) -->
 <section class="sec lite" id="demos" aria-labelledby="ex-h">
+<canvas class="df" aria-hidden="true"></canvas>
 <div class="hl-layer" aria-hidden="true"><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span></div>
 <div class="wrap">
 <div class="sh">
@@ -840,6 +849,7 @@ html{scroll-behavior:auto}
 
 <!-- 7 · PROCESS -->
 <section class="sec lite" aria-labelledby="pr-h">
+<canvas class="df" aria-hidden="true"></canvas>
 <div class="hl-layer" aria-hidden="true"><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span></div>
 <div class="wrap">
 <div class="sh">
@@ -856,6 +866,7 @@ html{scroll-behavior:auto}
 
 <!-- 8 · ABOUT -->
 <section class="sec tint lite" aria-labelledby="ab-h">
+<canvas class="df" aria-hidden="true"></canvas>
 <div class="hl-layer" aria-hidden="true"><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span></div>
 <div class="wrap">
 <div class="sh">
@@ -912,6 +923,7 @@ html{scroll-behavior:auto}
 
 <!-- 9 · FAQ -->
 <section class="sec lite" aria-labelledby="faq-h">
+<canvas class="df" aria-hidden="true"></canvas>
 <div class="hl-layer" aria-hidden="true"><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span></div>
 <div class="wrap">
 <div class="sh">
@@ -1148,13 +1160,58 @@ document.querySelectorAll('[data-mini]').forEach(box => {
       a.addEventListener('mouseenter', on); a.addEventListener('mouseleave', off);
       offs.push(function () { a.removeEventListener('mouseenter', on); a.removeEventListener('mouseleave', off); });
     });
+
+    // ── reactive dot field: the grid becomes dots that swell, lift and warm to orange near the cursor ──
+    (function () {
+      var cvs = [].slice.call(document.querySelectorAll('canvas.df')); if (!cvs.length) return;
+      var still = matchMedia('(prefers-reduced-motion: reduce)').matches, touch = matchMedia('(hover: none)').matches, GAP = 36, TAU = Math.PI * 2;
+      cvs.forEach(function (cv) {
+        var sec = cv.parentElement, ctx = cv.getContext('2d'), W = 0, H = 0, cols = 0, rows = 0, run = false, raf = 0, last = 0, vis = false;
+        var m = { x: -9999, y: -9999, tx: -9999, ty: -9999, k: 0, tk: 0 }, ripples = [], R = 180;
+        function size() { var r = sec.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2); W = r.width; H = r.height; cv.width = W * d; cv.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0); cols = Math.ceil(W / GAP) + 1; rows = Math.ceil(H / GAP) + 1; R = W < 760 ? 130 : 180; draw(0); }
+        function fieldAt(x, y) { var f = 0;
+          if (m.k > .001) { var dx = x - m.x, dy = y - m.y, d = Math.sqrt(dx * dx + dy * dy); if (d < R) { var q = 1 - d / R; f = q * q * (3 - 2 * q) * m.k; } }
+          for (var i = 0; i < ripples.length; i++) { var rp = ripples[i], dd = Math.abs(Math.hypot(x - rp.x, y - rp.y) - rp.r); if (dd < 70) { var g = (1 - dd / 70); f = Math.max(f, g * g * rp.a); } }
+          return f; }
+        function draw(dt) {
+          ctx.clearRect(0, 0, W, H);
+          m.x += (m.tx - m.x) * Math.min(1, dt * 10 || 1); m.y += (m.ty - m.y) * Math.min(1, dt * 10 || 1); m.k += (m.tk - m.k) * Math.min(1, dt * 5 || 1);
+          ripples.forEach(function (rp) { rp.r += rp.v * dt; rp.a = Math.max(0, 1 - rp.r / rp.max); }); ripples = ripples.filter(function (rp) { return rp.a > 0; });
+          var y0 = 0, y1 = rows;
+          ctx.fillStyle = 'rgba(14,19,22,.17)';
+          ctx.beginPath();
+          var hot = [];
+          for (var r = y0; r < y1; r++) for (var c = 0; c < cols; c++) { var x = c * GAP, y = r * GAP, f = fieldAt(x, y);
+            if (f < .02) { ctx.moveTo(x + 1.15, y); ctx.arc(x, y, 1.15, 0, TAU); } else hot.push([x, y, f]); }
+          ctx.fill();
+          hot.forEach(function (h) { var x = h[0], y = h[1], f = h[2], dx = x - m.x, dy = y - m.y, d = Math.hypot(dx, dy) || 1, push = f * 10;
+            var px = x + dx / d * push * (m.k > .01 ? 1 : 0), py = y + dy / d * push * (m.k > .01 ? 1 : 0) - f * 9, rad = 1.15 + f * 3.4;
+            ctx.fillStyle = 'rgba(14,19,22,' + (.06 * f).toFixed(3) + ')'; ctx.beginPath(); ctx.ellipse(x, y + 1.5, rad * .9, rad * .45, 0, 0, TAU); ctx.fill();
+            var cr = Math.round(14 + (200 - 14) * f), cg = Math.round(19 + (64 - 19) * f), cb = Math.round(22 + (26 - 22) * f);
+            ctx.fillStyle = 'rgba(' + cr + ',' + cg + ',' + cb + ',' + (.17 + f * .75).toFixed(3) + ')'; ctx.beginPath(); ctx.arc(px, py, rad, 0, TAU); ctx.fill();
+            if (f > .55) { ctx.fillStyle = 'rgba(255,240,232,' + ((f - .55) * 1.4).toFixed(3) + ')'; ctx.beginPath(); ctx.arc(px - rad * .3, py - rad * .3, rad * .35, 0, TAU); ctx.fill(); } });
+        }
+        function active() { return m.k > .005 || m.tk > 0 || ripples.length; }
+        function loop(now) { var dt = Math.min(.05, (now - (last || now)) / 1000); last = now; draw(dt); if (vis && active()) raf = requestAnimationFrame(loop); else { run = false; draw(0); } }
+        function kick() { if (!run && vis) { run = true; last = 0; raf = requestAnimationFrame(loop); } }
+        function mv(e) { var r = cv.getBoundingClientRect(); m.tx = e.clientX - r.left; m.ty = e.clientY - r.top; if (m.k < .01) { m.x = m.tx; m.y = m.ty; } m.tk = 1; kick(); }
+        function lv() { m.tk = 0; kick(); }
+        function ripple(x, y) { if (still) return; ripples.push({ x: x, y: y, r: 0, v: 520, max: Math.max(W, 600) * .9, a: 1 }); kick(); }
+        function tap(e) { var r = cv.getBoundingClientRect(); ripple(e.clientX - r.left, e.clientY - r.top); }
+        if (!touch && !still) { sec.addEventListener('mousemove', mv); sec.addEventListener('mouseleave', lv); }
+        if (touch) sec.addEventListener('pointerdown', tap);
+        var io = new IntersectionObserver(function (es) { var was = vis; vis = es[0].isIntersecting; if (vis && !was) { draw(0); if (touch) ripple(W / 2, Math.max(0, -cv.getBoundingClientRect().top) + 140); } }, { threshold: .15 }); io.observe(cv);
+        var ro = new ResizeObserver(size); ro.observe(sec); size();
+        offs.push(function () { cancelAnimationFrame(raf); io.disconnect(); ro.disconnect(); sec.removeEventListener('mousemove', mv); sec.removeEventListener('mouseleave', lv); sec.removeEventListener('pointerdown', tap); });
+      });
+    })();
 })();
 
 // Grid highlight: the 36px tile under the cursor lights up (hero + every dark section)
 (function(){
   if(!window.matchMedia) return;
   var still=matchMedia('(prefers-reduced-motion: reduce)').matches, touch=matchMedia('(hover: none)').matches;
-  if(!still&&!touch) document.querySelectorAll('.hero, .dark, .lite').forEach(function(zone){
+  if(!still&&!touch) document.querySelectorAll('.hero, .dark').forEach(function(zone){
     var layer=zone.querySelector(':scope > .hero-bg, :scope > .hl-layer'); if(!layer) return;
     var cells=[].slice.call(layer.querySelectorAll('.hl')), i=0, last='';
     zone.addEventListener('mousemove',function(e){
