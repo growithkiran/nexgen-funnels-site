@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="logo-mark.svg" type="image/svg+xml">
 <title>Live demo | NexGen Funnels</title>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box}
-body{margin:0;background:#0E1115;color:#F3F6F5;font-family:'Hanken Grotesk',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;background:#0E1115;color:#F3F6F5;font-family:'Schibsted Grotesk',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
 a{color:#F4A07F}a:hover{color:#fff}
 h1,h2,h3,p,dl,dd{margin:0}
 button{font:inherit}
@@ -23,8 +23,8 @@ button{font:inherit}
 .pv-back{justify-self:start;display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 16px 0 12px;border-radius:999px;border:1px solid var(--line);color:var(--ink);font-weight:600;font-size:15px;text-decoration:none;transition:background-color .2s ease,border-color .2s ease}
 .pv-back:hover{color:#fff;background:rgba(243,246,245,.06);border-color:rgba(243,246,245,.3)}
 .pv-title{display:flex;flex-direction:column;align-items:center;text-align:center;gap:3px}
-.pv-title h1{font-family:'Newsreader',Georgia,serif;font-weight:300;font-size:26px;line-height:1.1;letter-spacing:-.02em}
-.pv-title p{font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.pv-title h1{font-family:'Gloock',Georgia,serif;font-weight:400;font-size:26px;line-height:1.1;letter-spacing:-.02em}
+.pv-title p{font-family:'Schibsted Grotesk',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;font-weight:500;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .btn{justify-self:end;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:0 20px;border-radius:999px;background:#F3F6F5;color:#0E1316;font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap;transition:background-color .2s ease,color .2s ease}
 .btn:hover{background:var(--accent);color:#fff}
 
@@ -41,7 +41,7 @@ button{font:inherit}
 .ib[aria-disabled="true"]{opacity:.35;cursor:default}
 .pv-url{flex:1;min-width:0;display:flex;align-items:center;justify-content:center;gap:8px;height:36px;padding:0 16px;border-radius:10px;background:rgba(243,246,245,.06);color:rgba(243,246,245,.7);font-size:13.5px}
 .pv-url span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.pv-live{display:inline-flex;align-items:center;gap:6px;margin-left:6px;height:22px;padding:0 9px;border-radius:999px;background:rgba(40,200,64,.14);color:#8BE39A;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;flex:none}
+.pv-live{display:inline-flex;align-items:center;gap:6px;margin-left:6px;height:22px;padding:0 9px;border-radius:999px;background:rgba(40,200,64,.14);color:#8BE39A;font-family:'Schibsted Grotesk',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;font-weight:500;font-size:10px;letter-spacing:.1em;text-transform:uppercase;flex:none}
 .pv-live::before{content:"";width:6px;height:6px;border-radius:50%;background:#28C840}
 .pv-seg{display:flex;gap:2px;padding:3px;border-radius:12px;background:rgba(243,246,245,.06);flex:none}
 .pv-seg button{display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:0 13px;border:0;border-radius:9px;background:transparent;color:rgba(243,246,245,.7);font-weight:600;font-size:13.5px;cursor:pointer;transition:background-color .2s ease,color .2s ease}
@@ -54,15 +54,15 @@ button{font:inherit}
 .pv-phone{position:absolute;top:24px;bottom:0;left:50%;width:406px;margin-left:-203px;padding:8px 8px 0;border-radius:46px 46px 0 0;background:#262C2F;border:1px solid rgba(243,246,245,.2);border-bottom:0;box-shadow:0 40px 80px -30px rgba(0,0,0,.8)}
 .pv-screen{position:relative;height:100%;border-radius:38px 38px 0 0;overflow:hidden;background:#0B0F11;clip-path:inset(0 round 38px 38px 0 0);-webkit-mask-image:-webkit-radial-gradient(white,black);transform:translateZ(0);isolation:isolate}
 .live-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:32px;text-align:center;background-color:#141A1D;background-image:repeating-linear-gradient(135deg,rgba(243,246,245,.05) 0 1px,transparent 1px 12px)}
-.live-ph b{font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#8BE39A}
-.live-ph h2{font-family:'Newsreader',Georgia,serif;font-weight:300;font-size:34px;line-height:1.1;letter-spacing:-.02em;max-width:18ch}
+.live-ph b{font-family:'Schibsted Grotesk',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;font-weight:500;font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#8BE39A}
+.live-ph h2{font-family:'Gloock',Georgia,serif;font-weight:400;font-size:34px;line-height:1.1;letter-spacing:-.02em;max-width:18ch}
 .pv-phone .live-ph h2{font-size:24px}
 .live-ph p{max-width:30em;font-size:15.5px;line-height:1.55;color:var(--muted)}
 .live-ph a{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:600;font-size:15px}
 
 /* info */
 .pv-info{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);gap:32px;margin:28px auto 0;padding:28px 32px;border:1px solid var(--line);border-radius:22px;background:rgba(243,246,245,.04)}
-.lbl{font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.lbl{font-family:'Schibsted Grotesk',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;font-weight:500;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
 .pv-info p{font-size:15.5px;line-height:1.55;color:var(--ink2)}
 .pv-info dd{font-size:15.5px;line-height:1.45}
 .pv-info .lbl{font-size:11.5px;line-height:1.4;color:var(--muted)}
@@ -92,9 +92,9 @@ button{font:inherit}
 .pv-desk{overflow:hidden}
 .pv-desk iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent}
 .pv-screen iframe{position:absolute;top:0;left:0;width:390px;border:0;background:transparent;transform-origin:0 0}
-.pv-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(243,246,245,.45)}
+.pv-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Schibsted Grotesk',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(243,246,245,.45)}
 .pv-missing{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:32px;text-align:center}
-.pv-missing h2{font-family:'Newsreader',Georgia,serif;font-weight:300;font-size:32px}
+.pv-missing h2{font-family:'Gloock',Georgia,serif;font-weight:400;font-size:32px}
 .pv-missing p{color:rgba(243,246,245,.62)}
 </style>
 </head>
@@ -147,31 +147,31 @@ const PROJECTS = {
     name: 'Studio Aara',
     url: 'https://darkgray-partridge-447437.hostingersite.com/',
     category: 'Website', type: 'Interior design', role: 'Strategy, design & build',
-    about: 'A website for a Bengaluru studio creating considered, personal residential interiors, with projects, services, process and a clear path to book a design consultation.'
+    about: 'A website for an interior design studio in Bengaluru that designs homes. It shows their projects, services and process, and every page ends with a way to book a design consultation.'
   },
   nurture: {
     name: 'Nurture',
     url: 'https://darkcyan-crow-807664.hostingersite.com/',
     category: 'Landing page', type: 'Wellness', role: 'Strategy, design & build',
-    about: 'A landing page for a gentle fertility wellness program built around movement, breathwork, relaxation and mindful connection, guiding visitors to explore the program.'
+    about: 'A landing page for a fertility wellness program that combines movement, breathwork and relaxation. It explains the program simply and guides visitors to find out more.'
   },
   flowpilot: {
     name: 'FlowPilot AI',
     url: 'https://limegreen-lyrebird-874389.hostingersite.com/',
     category: 'Landing page', type: 'Concept study', role: 'Everything: strategy, copy, design and build',
-    about: 'A landing page for a service that builds practical AI automation for growing businesses. It explains the problem, what gets automated and how it works, and leads visitors to book a free automation audit.'
+    about: 'A concept landing page for an agency that sets up AI automations for small businesses. It explains the problem, shows what can be automated and asks visitors to book a free automation audit.'
   },
   kusum: {
     name: 'Kusum Yoga',
     url: 'https://violet-bear-656585.hostingersite.com/',
     category: 'Sales funnel', type: 'Fertility yoga', role: 'Strategy, design & build',
-    about: 'A funnel for live online fertility yoga for couples, built to turn interested visitors into WhatsApp conversations.'
+    about: 'A funnel for live online fertility yoga classes for couples. Every step leads to one action: starting a conversation on WhatsApp.'
   },
   sukha: {
     name: 'Sukha Fertility Yoga',
     url: 'https://fertility-yoga-sales-landing-560589.hostingersite.com/',
     category: 'Sales page', type: 'Yoga program', role: 'Strategy, design & build',
-    about: 'A sales page for a gentle 30-day fertility yoga program: live yoga, breathwork and hormone-balancing flows on a simple monthly membership.'
+    about: 'A sales page for a 30-day fertility yoga program with live yoga, breathwork and hormone-balancing flows, sold as a simple monthly membership.'
   }
   // , nextproject: { name: '…', url: 'https://…', category: '…', type: '…', role: '…', about: '…' }
 };
