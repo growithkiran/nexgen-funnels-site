@@ -53,6 +53,7 @@ main{flex:1 0 auto;display:flex;flex-direction:column}
 .btn svg{transition:transform .2s ease}
 .btn:hover svg{transform:translateX(3px)}
 .btn-sm{min-height:44px;padding:0 20px;font-size:15px}
+@media (max-width:600px){.cta-wa{display:none}}
 .btn-white{background:#F3F6F5;color:#0E1316}
 .btn-white:hover{background:var(--accent);color:#fff}
 
@@ -100,8 +101,15 @@ main{flex:1 0 auto;display:flex;flex-direction:column}
 .beam{position:relative}
 .beam::before,.beam::after{content:"";position:absolute;inset:-3px;border-radius:inherit;pointer-events:none;background:conic-gradient(from var(--beam),transparent 0deg,transparent 200deg,rgba(244,160,127,.25) 260deg,#F4A07F 310deg,#fff 335deg,#C8401A 352deg,transparent 360deg);animation:beamSpin 3.2s linear infinite}
 .beam::before{padding:2px;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
-.beam::after{z-index:-1;inset:-6px;filter:blur(10px);opacity:.55}
+.beam::after{z-index:-1;inset:-8px;padding:8px;filter:blur(10px);opacity:.55;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
 @keyframes beamSpin{to{--beam:360deg}}
+/* border beam on Recent Work image cards */
+.rw-img{isolation:isolate}
+.rw-img::after{content:"";position:absolute;inset:0;z-index:2;border-radius:inherit;padding:2px;pointer-events:none;background:conic-gradient(from var(--beam),transparent 0deg,transparent 210deg,rgba(244,160,127,.3) 265deg,#F4A07F 312deg,#fff 336deg,#C8401A 352deg,transparent 360deg);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:beamSpin 5s linear infinite}
+.rw:nth-child(3n+2) .rw-img::after{animation-delay:-1.7s}
+.rw:nth-child(3n) .rw-img::after{animation-delay:-3.4s}
+.rw:nth-child(n+4):nth-child(-n+6) .rw-img::after{animation-direction:reverse}
+
 
 /* ── hero funnel map ── */
 @keyframes vFlow{from{background-position:0 100%}to{background-position:0 -100%}}
@@ -202,7 +210,7 @@ main{flex:1 0 auto;display:flex;flex-direction:column}
 .dmc-sub{position:relative;margin-top:6px;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(243,246,245,.62)}
 .dm{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:24px;background:var(--card);overflow:clip;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,border-color .35s ease}
 .dm:hover{transform:translateY(-4px);box-shadow:0 30px 60px -38px rgba(14,19,22,.5)}
-.dm-thumb{position:relative;display:block;aspect-ratio:16/10;background:#0B0F11;border-bottom:1px solid var(--line)}
+.dm-thumb{position:relative;display:block;aspect-ratio:16/10;background:#0B0F11;border-bottom:1px solid var(--line);overflow:hidden;border-radius:24px 24px 0 0;clip-path:inset(0 round 24px 24px 0 0);-webkit-mask-image:-webkit-radial-gradient(white,black);transform:translateZ(0)}
 .dm-thumb img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
 .dm:hover .dm-thumb img{transform:scale(1.04)}
 .dm-thumb .ph{height:100%}
@@ -518,7 +526,7 @@ html{scroll-behavior:auto}
 <div class="wrap">
 <div class="nav-in">
 <a class="wm" href="#top" aria-label="NexGen Funnels — home"><svg class="wm-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true"><defs><linearGradient id="nxA" x1="8" y1="40" x2="30" y2="8" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#C8401A"></stop><stop offset="1" stop-color="#F08A5D"></stop></linearGradient><linearGradient id="nxB" x1="28" y1="34" x2="42" y2="8" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#F4A07F"></stop><stop offset="1" stop-color="#FFD2BD"></stop></linearGradient></defs><path d="M11 38V17c0-6.2 7.6-8.2 10.6-2.6l7 13.2" stroke="url(#nxA)" stroke-width="8.4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M28.6 27.6c3 5.6 10.6 3.6 10.6-2.6V10" stroke="url(#nxB)" stroke-width="8.4" stroke-linecap="round" stroke-linejoin="round" opacity=".92"></path></svg><span class="wm-a">exGen</span><span class="wm-b">Funnels</span></a>
-<a class="btn btn-sm btn-white" href="https://wa.me/919113290223" target="_blank" rel="noopener" data-book>Book a Call</a>
+<a class="btn btn-sm btn-white" href="https://wa.me/919113290223?text=Hi%20Kiran%2C%20I%20saw%20your%20website%20and%20I%27d%20like%20to%20talk%20about%20a%20funnel%20for%20my%20business." target="_blank" rel="noopener" data-book aria-label="Let’s talk on WhatsApp"><span>Let’s talk<span class="cta-wa"> on WhatsApp</span></span></a>
 </div>
 </div>
 </header>
@@ -547,8 +555,8 @@ html{scroll-behavior:auto}
 <h1 id="hero-h" class="h1">Funnels that turn clicks into <em>clients</em>.</h1>
 <p class="hero-sub">I plan, design and build <b>sales funnels, landing pages and websites</b> for coaches, course creators and growing businesses — strategy, copy and build in one place, <b>without the tech headaches</b>.</p>
 <div class="hero-cta">
-<a class="btn btn-white beam" href="https://wa.me/919113290223" target="_blank" rel="noopener" data-book>Book a Call<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3.5 9h11M10 4.5L14.5 9 10 13.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
-<p class="hero-note">A free 30-minute strategy call. We’ll look at your offer, your funnel and your next move.</p>
+<a class="btn btn-white beam" href="https://wa.me/919113290223?text=Hi%20Kiran%2C%20I%20saw%20your%20website%20and%20I%27d%20like%20to%20talk%20about%20a%20funnel%20for%20my%20business." target="_blank" rel="noopener" data-book>Let’s talk on WhatsApp<svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 11.6a8.4 8.4 0 01-12.3 7.4L3.5 20.5l1.5-4.5a8.4 8.4 0 1115.5-4.4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path><path d="M8.5 11.8h.01M12 11.8h.01M15.5 11.8h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path></svg></a>
+<p class="hero-note">Send a quick message about your business. We’ll look at your offer, your funnel and your next move.</p>
 </div>
 </div>
 
@@ -668,8 +676,8 @@ html{scroll-behavior:auto}
 </div>
 
 <div class="svc-foot">
-<p>Not sure what you need yet? That’s exactly what the free strategy call is for.</p>
-<a class="btn" href="https://wa.me/919113290223" target="_blank" rel="noopener" data-book>Book a Call<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3.5 9h11M10 4.5L14.5 9 10 13.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+<p>Not sure what you need yet? Send me a message and we’ll work it out together.</p>
+<a class="btn beam" href="https://wa.me/919113290223?text=Hi%20Kiran%2C%20I%20saw%20your%20website%20and%20I%27d%20like%20to%20talk%20about%20a%20funnel%20for%20my%20business." target="_blank" rel="noopener" data-book>Let’s talk on WhatsApp<svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 11.6a8.4 8.4 0 01-12.3 7.4L3.5 20.5l1.5-4.5a8.4 8.4 0 1115.5-4.4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path><path d="M8.5 11.8h.01M12 11.8h.01M15.5 11.8h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path></svg></a>
 </div>
 </div>
 </section>
@@ -892,8 +900,8 @@ html{scroll-behavior:auto}
 </div>
 </div>
 <div class="faq-foot">
-<p class="body">Still have a question? Bring it to the call.</p>
-<a class="btn" href="https://wa.me/919113290223" target="_blank" rel="noopener" data-book>Book a Call<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3.5 9h11M10 4.5L14.5 9 10 13.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+<p class="body">Still have a question? Send it my way on WhatsApp.</p>
+<a class="btn beam" href="https://wa.me/919113290223?text=Hi%20Kiran%2C%20I%20saw%20your%20website%20and%20I%27d%20like%20to%20talk%20about%20a%20funnel%20for%20my%20business." target="_blank" rel="noopener" data-book>Let’s talk on WhatsApp<svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 11.6a8.4 8.4 0 01-12.3 7.4L3.5 20.5l1.5-4.5a8.4 8.4 0 1115.5-4.4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path><path d="M8.5 11.8h.01M12 11.8h.01M15.5 11.8h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path></svg></a>
 </div>
 </div>
 </section>
@@ -902,10 +910,10 @@ html{scroll-behavior:auto}
 <section class="cta dark" aria-labelledby="cta-h">
 <div class="hl-layer" aria-hidden="true"><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span></div>
 <div class="wrap cta-in">
-<p class="kicker"><span class="k-t">Let’s talk</span></p>
+<p class="kicker"><span class="k-t">Get in touch</span></p>
 <h2 id="cta-h" class="h2">Ready to stop <em>losing leads</em>?</h2>
-<p class="cta-p">Book a free 30-minute strategy call. We’ll look at your offer, your current funnel and where it’s leaking — and map out what to fix first.</p>
-<a class="btn" href="https://wa.me/919113290223" target="_blank" rel="noopener" data-book>Book a Call<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3.5 9h11M10 4.5L14.5 9 10 13.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+<p class="cta-p">Message me on WhatsApp. We’ll look at your offer, your current funnel and where it’s leaking — and map out what to fix first.</p>
+<a class="btn beam" href="https://wa.me/919113290223?text=Hi%20Kiran%2C%20I%20saw%20your%20website%20and%20I%27d%20like%20to%20talk%20about%20a%20funnel%20for%20my%20business." target="_blank" rel="noopener" data-book>Let’s talk on WhatsApp<svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 11.6a8.4 8.4 0 01-12.3 7.4L3.5 20.5l1.5-4.5a8.4 8.4 0 1115.5-4.4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path><path d="M8.5 11.8h.01M12 11.8h.01M15.5 11.8h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path></svg></a>
 </div>
 </section>
 
@@ -921,7 +929,7 @@ html{scroll-behavior:auto}
 </div>
 <script>
 /* ── EDIT HERE ─────────────────────────────────────── */
-const BOOKING_URL = 'https://wa.me/919113290223';   // ← WhatsApp link used by every "Book a Call" button
+const BOOKING_URL = 'https://wa.me/919113290223?text=Hi%20Kiran%2C%20I%20saw%20your%20website%20and%20I%27d%20like%20to%20talk%20about%20a%20funnel%20for%20my%20business.';   // ← WhatsApp link used by every "Let’s talk on WhatsApp" button
 /* ──────────────────────────────────────────────────── */
 document.querySelectorAll('[data-book]').forEach(a => { a.href = BOOKING_URL; });
 document.querySelectorAll('.faq').forEach(item => {

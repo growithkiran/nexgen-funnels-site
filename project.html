@@ -49,10 +49,10 @@ button{font:inherit}
 .pv-seg button.is-on{background:#F3F6F5;color:#0E1316}
 
 /* stage */
-.pv-stage{position:relative;height:max(560px,calc(100vh - 260px));background-color:#0B0F11;background-image:radial-gradient(rgba(243,246,245,.07) 1px,transparent 1px);background-size:20px 20px}
+.pv-stage{position:relative;overflow:hidden;border-radius:0 0 17px 17px;clip-path:inset(0 round 0 0 17px 17px);height:max(560px,calc(100vh - 260px));background-color:#0B0F11;background-image:radial-gradient(rgba(243,246,245,.07) 1px,transparent 1px);background-size:20px 20px}
 .pv-desk{position:absolute;inset:0}
 .pv-phone{position:absolute;top:24px;bottom:0;left:50%;width:406px;margin-left:-203px;padding:8px 8px 0;border-radius:46px 46px 0 0;background:#262C2F;border:1px solid rgba(243,246,245,.2);border-bottom:0;box-shadow:0 40px 80px -30px rgba(0,0,0,.8)}
-.pv-screen{position:relative;height:100%;border-radius:38px 38px 0 0;overflow:clip;background:#0B0F11}
+.pv-screen{position:relative;height:100%;border-radius:38px 38px 0 0;overflow:hidden;background:#0B0F11;clip-path:inset(0 round 38px 38px 0 0);-webkit-mask-image:-webkit-radial-gradient(white,black);transform:translateZ(0);isolation:isolate}
 .live-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:32px;text-align:center;background-color:#141A1D;background-image:repeating-linear-gradient(135deg,rgba(243,246,245,.05) 0 1px,transparent 1px 12px)}
 .live-ph b{font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#8BE39A}
 .live-ph h2{font-family:'Newsreader',Georgia,serif;font-weight:300;font-size:34px;line-height:1.1;letter-spacing:-.02em;max-width:18ch}
@@ -74,6 +74,7 @@ button{font:inherit}
 .pv-url{display:none}
 }
 @media (max-width:600px){
+.cta-wa{display:none}
 .wrap{padding:0 12px}
 .pv-back span{display:none}
 .pv-nav{display:none}
@@ -82,7 +83,7 @@ button{font:inherit}
 .pv-seg button span{display:none}
 .pv-stage{height:calc(100vh - 210px);min-height:480px}
 .pv-phone{width:auto;left:12px;right:12px;margin-left:0;top:14px;border-radius:36px 36px 0 0}
-.pv-screen{border-radius:30px 30px 0 0}
+.pv-screen{border-radius:30px 30px 0 0;clip-path:inset(0 round 30px 30px 0 0)}
 .pv-info{grid-template-columns:minmax(0,1fr);gap:18px;padding:22px}
 }
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{transition:none !important;animation:none !important}}
@@ -102,7 +103,7 @@ button{font:inherit}
 <header class="wrap pv-top">
 <a class="pv-back" href="index.html#demos"><svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M14.5 9h-11M8 4.5L3.5 9 8 13.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>All live demos</span></a>
 <div class="pv-title"><h1 id="pName">Live demo</h1><p id="pMeta"></p></div>
-<a class="btn" href="https://wa.me/919113290223" target="_blank" rel="noopener" data-book>Book a Call</a>
+<a class="btn" href="https://wa.me/919113290223?text=Hi%20Kiran%2C%20I%20saw%20your%20website%20and%20I%27d%20like%20to%20talk%20about%20a%20funnel%20for%20my%20business." target="_blank" rel="noopener" data-book aria-label="Let’s talk on WhatsApp"><span>Let’s talk<span class="cta-wa"> on WhatsApp</span></span></a>
 </header>
 
 <main class="wrap">
@@ -139,7 +140,7 @@ button{font:inherit}
 </div>
 <script>
 /* ── EDIT HERE ─────────────────────────────────────── */
-const BOOKING_URL = 'https://wa.me/919113290223';   // ← WhatsApp link used by every "Book a Call" button
+const BOOKING_URL = 'https://wa.me/919113290223?text=Hi%20Kiran%2C%20I%20saw%20your%20website%20and%20I%27d%20like%20to%20talk%20about%20a%20funnel%20for%20my%20business.';   // ← WhatsApp link used by every "Let’s talk on WhatsApp" button
 // One entry per live demo. The key is what goes after ?p= in the link (project.html?p=flowpilot).
 const PROJECTS = {
   aara: {
