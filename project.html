@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="logo-mark.svg" type="image/svg+xml">
-<title>Live demo — NexGen Funnels</title>
+<title>Live demo | NexGen Funnels</title>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box}
@@ -147,19 +147,19 @@ const PROJECTS = {
     name: 'Studio Aara',
     url: 'https://darkgray-partridge-447437.hostingersite.com/',
     category: 'Website', type: 'Interior design', role: 'Strategy, design & build',
-    about: 'A website for a Bengaluru studio creating considered, personal residential interiors — projects, services, process and a clear path to book a design consultation.'
+    about: 'A website for a Bengaluru studio creating considered, personal residential interiors, with projects, services, process and a clear path to book a design consultation.'
   },
   nurture: {
     name: 'Nurture',
     url: 'https://darkcyan-crow-807664.hostingersite.com/',
     category: 'Landing page', type: 'Wellness', role: 'Strategy, design & build',
-    about: 'A landing page for a gentle fertility wellness program — movement, breathwork, relaxation and mindful connection — guiding visitors to explore the program.'
+    about: 'A landing page for a gentle fertility wellness program built around movement, breathwork, relaxation and mindful connection, guiding visitors to explore the program.'
   },
   flowpilot: {
     name: 'FlowPilot AI',
     url: 'https://limegreen-lyrebird-874389.hostingersite.com/',
-    category: 'Landing page', type: 'Concept study', role: 'Everything — strategy, copy, design and build',
-    about: 'A landing page for a service that builds practical AI automation for growing businesses — explaining the problem, what gets automated and how it works, and leading visitors to book a free automation audit.'
+    category: 'Landing page', type: 'Concept study', role: 'Everything: strategy, copy, design and build',
+    about: 'A landing page for a service that builds practical AI automation for growing businesses. It explains the problem, what gets automated and how it works, and leads visitors to book a free automation audit.'
   },
   kusum: {
     name: 'Kusum Yoga',
@@ -171,7 +171,7 @@ const PROJECTS = {
     name: 'Sukha Fertility Yoga',
     url: 'https://fertility-yoga-sales-landing-560589.hostingersite.com/',
     category: 'Sales page', type: 'Yoga program', role: 'Strategy, design & build',
-    about: 'A sales page for a gentle 30-day fertility yoga program — live yoga, breathwork and hormone-balancing flows on a simple monthly membership.'
+    about: 'A sales page for a gentle 30-day fertility yoga program: live yoga, breathwork and hormone-balancing flows on a simple monthly membership.'
   }
   // , nextproject: { name: '…', url: 'https://…', category: '…', type: '…', role: '…', about: '…' }
 };
@@ -184,18 +184,18 @@ const desk = $('desk'), phone = $('phone'), screen = $('screen');
 let device = 'desktop', fDesk = null, fMob = null;
 
 if (!p || !p.url) {
-  document.title = 'Demo not found — NexGen Funnels';
+  document.title = 'Demo not found | NexGen Funnels';
   $('pName').textContent = 'Demo not found';
   desk.innerHTML = '<div class="pv-missing"><h2>This demo isn’t available.</h2><p>Head back to the gallery to pick another project.</p><a class="btn" href="index.html#demos">All live demos</a></div>';
   $('pLive').hidden = true; $('pOpen').hidden = true; document.querySelector('.pv-info').hidden = true;
 } else {
-  document.title = p.name + ' — Live demo · NexGen Funnels';
+  document.title = p.name + ' | Live demo · NexGen Funnels';
   $('pName').textContent = p.name;
   $('pMeta').textContent = p.category + ' · ' + p.type;
   $('pDomain').textContent = p.url.replace(/^https?:\/\//, '').replace(/\/$/, '');
   $('pOpen').href = p.url;
   $('pAbout').textContent = p.about; $('pCat').textContent = p.category; $('pRole').textContent = p.role; $('pType').textContent = p.type;
-  fDesk = frame(p.name + ' — live desktop preview'); desk.appendChild(fDesk); fDesk.src = p.url;
+  fDesk = frame(p.name + ', live desktop preview'); desk.appendChild(fDesk); fDesk.src = p.url;
 }
 function frame(title) {
   const f = document.createElement('iframe');
@@ -212,7 +212,7 @@ document.querySelectorAll('.pv-seg button').forEach(b => b.addEventListener('cli
   device = b.dataset.device;
   document.querySelectorAll('.pv-seg button').forEach(x => { const on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-pressed', String(on)); });
   desk.hidden = device !== 'desktop'; phone.hidden = device !== 'mobile';
-  if (device === 'mobile' && p && p.url && !fMob) { fMob = frame(p.name + ' — live mobile preview'); screen.appendChild(fMob); fMob.src = p.url; }
+  if (device === 'mobile' && p && p.url && !fMob) { fMob = frame(p.name + ', live mobile preview'); screen.appendChild(fMob); fMob.src = p.url; }
   fitPhone();
 }));
 $('reload').addEventListener('click', () => { const f = device === 'desktop' ? fDesk : fMob; if (f) f.src = f.src; });
