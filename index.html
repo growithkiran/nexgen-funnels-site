@@ -1182,7 +1182,7 @@ document.querySelectorAll('[data-mini]').forEach(box => {
           ctx.fillStyle = 'rgba(14,19,22,.17)';
           ctx.beginPath();
           var hot = [];
-          for (var r = y0; r < y1; r++) for (var c = 0; c < cols; c++) { var x = c * GAP, y = r * GAP, f = fieldAt(x, y);
+          for (var r = y0; r < y1; r++) for (var c = 0; c < cols; c++) { var x = c * GAP, y = r * GAP, f = fieldAt(x, y) * (touch ? maskAt(c, r) : 1);
             if (f < .02) { ctx.moveTo(x + 1.15, y); ctx.arc(x, y, 1.15, 0, TAU); } else hot.push([x, y, f]); }
           ctx.fill();
           hot.forEach(function (h) { var x = h[0], y = h[1], f = h[2], dx = x - m.x, dy = y - m.y, d = Math.hypot(dx, dy) || 1, push = f * 10;
@@ -1196,7 +1196,7 @@ document.querySelectorAll('[data-mini]').forEach(box => {
         function loop(now) { var dt = Math.min(.05, (now - (last || now)) / 1000); last = now; draw(dt); if (vis && active()) raf = requestAnimationFrame(loop); else { run = false; draw(0); } }
         function kick() { if (!run && vis) { run = true; last = 0; raf = requestAnimationFrame(loop); } }
         // fade the field as the cursor approaches any text in this section
-        var FADE = 90, rects = [], stale = true;
+        var FADE = 90, rects = [], stale = true, mask = null, rippled = false;
         function collect() {
           var o = cv.getBoundingClientRect(), out = [], rg = document.createRange();
           var tw = document.createTreeWalker(sec, NodeFilter.SHOW_TEXT, { acceptNode: function (n) {
@@ -1208,7 +1208,16 @@ document.querySelectorAll('[data-mini]').forEach(box => {
             for (var j = 0; j < rs.length; j++) { var r = rs[j]; if (r.width > 0 && r.height > 0) out.push([r.left - o.left, r.top - o.top, r.right - o.left, r.bottom - o.top]); }
           }
           rects = out; stale = false;
+          if (touch) { // per-dot text mask: dots near any text stay calm on phones
+            mask = new Float32Array(cols * rows);
+            for (var rr = 0; rr < rows; rr++) for (var cc = 0; cc < cols; cc++) {
+              var px = cc * GAP, py = rr * GAP, best = 1e9;
+              for (var i = 0; i < out.length; i++) { var q = out[i], dx = Math.max(q[0] - px, 0, px - q[2]), dy = Math.max(q[1] - py, 0, py - q[3]), d = dx * dx + dy * dy; if (d < best) best = d; }
+              var t = Math.min(1, Math.sqrt(best) / 60); mask[rr * cols + cc] = t * t * (3 - 2 * t);
+            }
+          }
         }
+        function maskAt(c, r) { if (stale) collect(); var v = mask ? mask[r * cols + c] : 1; return v === undefined ? 1 : v; }
         function textFade(x, y) {
           if (stale) collect();
           var best = 1e9;
@@ -1218,13 +1227,13 @@ document.querySelectorAll('[data-mini]').forEach(box => {
         function mv(e) { var r = cv.getBoundingClientRect(); m.tx = e.clientX - r.left; m.ty = e.clientY - r.top; if (m.k < .01) { m.x = m.tx; m.y = m.ty; } m.tk = textFade(m.tx, m.ty); kick(); }
         function en() { stale = true; }
         function lv() { m.tk = 0; kick(); }
-        function ripple(x, y) { if (still) return; ripples.push({ x: x, y: y, r: 0, v: 520, max: Math.max(W, 600) * .9, a: 1 }); kick(); }
+        function ripple(x, y) { if (still) return; stale = true; ripples.push({ x: x, y: y, r: 0, v: 520, max: Math.max(W, 600) * .9, a: touch ? .75 : 1 }); kick(); }
         function tap(e) { var r = cv.getBoundingClientRect(); ripple(e.clientX - r.left, e.clientY - r.top); }
         if (!touch && !still) { sec.addEventListener('mousemove', mv); sec.addEventListener('mouseleave', lv); sec.addEventListener('mouseenter', en); }
-        if (touch) sec.addEventListener('pointerdown', tap);
-        var io = new IntersectionObserver(function (es) { var was = vis; vis = es[0].isIntersecting; if (vis && !was) { draw(0); if (touch) ripple(W / 2, Math.max(0, -cv.getBoundingClientRect().top) + 140); } }, { threshold: .15 }); io.observe(cv);
+        if (touch) sec.addEventListener('click', tap);
+        var io = new IntersectionObserver(function (es) { var was = vis; vis = es[0].isIntersecting; if (vis && !was) { draw(0); if (touch && !rippled) { rippled = true; setTimeout(function () { ripple(W / 2, Math.max(0, -cv.getBoundingClientRect().top) + 140); }, 450); } } }, { threshold: .15 }); io.observe(cv);
         var ro = new ResizeObserver(function () { stale = true; size(); }); ro.observe(sec); size();
-        offs.push(function () { cancelAnimationFrame(raf); io.disconnect(); ro.disconnect(); sec.removeEventListener('mousemove', mv); sec.removeEventListener('mouseleave', lv); sec.removeEventListener('pointerdown', tap); sec.removeEventListener('mouseenter', en); });
+        offs.push(function () { cancelAnimationFrame(raf); io.disconnect(); ro.disconnect(); sec.removeEventListener('mousemove', mv); sec.removeEventListener('mouseleave', lv); sec.removeEventListener('click', tap); sec.removeEventListener('mouseenter', en); });
       });
     })();
     // ── hero top line: letters warm to orange and glow as the cursor gets close ──
