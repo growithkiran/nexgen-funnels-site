@@ -202,8 +202,6 @@ main{flex:1 0 auto;display:flex;flex-direction:column}
 /* ── 5 · live demos gallery ───────────────────────── */
 .dm-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:24px}
 .dm{grid-column:span 2}
-.dm:nth-child(-n+2){grid-column:span 3}
-.dm:nth-child(-n+2) .dm-body h3{font-size:30px}
 .dm-cover{position:absolute;inset:0;overflow:hidden;background:radial-gradient(120% 90% at 20% 10%,#14382D,#0A241C 70%);color:#F3F6F5;display:flex;flex-direction:column;justify-content:flex-end;padding:28px}
 .dmc-ring{position:absolute;right:-16%;top:-42%;width:66%;aspect-ratio:1;border-radius:50%;border:2px solid rgba(196,120,86,.35)}
 .dmc-disc{position:absolute;right:-2%;top:-6%;width:46%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.07)}
@@ -402,8 +400,8 @@ main{flex:1 0 auto;display:flex;flex-direction:column}
 .sh > :nth-child(n+3),.diff-head > :nth-child(3),.ab-grid > :nth-child(n+3),.cta-in > :nth-child(n+3){animation-range:entry 12% cover 32%}
 .issue:nth-child(2),.flow li:nth-child(2),.rw:nth-child(3n+2),.svc:nth-child(2),.dm:nth-child(2),.vid:nth-child(2){animation-range:entry 8% cover 30%}
 .issue:nth-child(3),.flow li:nth-child(3),.rw:nth-child(3n),.svc:nth-child(3),.dm:nth-child(3),.vid:nth-child(3){animation-range:entry 16% cover 36%}
-.dm:nth-child(4){animation-range:entry 8% cover 30%}
-.dm:nth-child(5){animation-range:entry 16% cover 36%}
+.dm:nth-child(5){animation-range:entry 8% cover 30%}
+.dm:nth-child(6){animation-range:entry 16% cover 36%}
 .issue:nth-child(4),.flow li:nth-child(4){animation-range:entry 24% cover 42%}
 .cta .h2{animation-name:zoomIn}
 .flow{view-timeline-name:--flow}
@@ -744,7 +742,7 @@ canvas.df{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-eve
 <div class="sh">
 <p class="kicker"><span class="k-t">Live demos</span></p>
 <h2 id="ex-h" class="h2">Try them <em>yourself</em>.</h2>
-<p class="sub">Five sites that are live right now. Each one opens in a desktop and mobile preview, so you can scroll and click around the way a visitor would.</p>
+<p class="sub">Six sites that are live right now. Each one opens in a desktop and mobile preview, so you can scroll and click around the way a visitor would.</p>
 </div>
 <div class="dm-grid">
 <article class="dm" data-p="aara">
@@ -805,6 +803,18 @@ canvas.df{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-eve
 <h3>Sukha Fertility Yoga</h3>
 <p>Sales page for a 30-day fertility yoga program, sold as a monthly membership.</p>
 <div class="dm-foot"><span class="dm-cat"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 3h12l-4.5 5.5V13L6.5 14V8.5z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"></path></svg>Sales page</span><span class="dm-live">Live</span></div>
+</div>
+</article>
+<article class="dm" data-p="auren">
+<div class="dm-thumb">
+<img src="demos/auren.jpg" alt="" width="1200" height="750" loading="lazy">
+<span class="dm-badge">Skincare</span>
+<div class="dm-over"><a class="dm-view" href="project.html?p=auren" data-p="auren" aria-label="View live demo of Auren">View demo<svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3.5 9h11M10 4.5L14.5 9 10 13.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></div>
+</div>
+<div class="dm-body">
+<h3>Auren</h3>
+<p>Online store for a botanical skincare brand with five refillable formulas.</p>
+<div class="dm-foot"><span class="dm-cat"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"></rect><path d="M5.5 14h5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg>Online store</span><span class="dm-live">Live</span></div>
 </div>
 </article>
 </div>
