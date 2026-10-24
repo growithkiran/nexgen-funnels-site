@@ -80,6 +80,51 @@ main{flex:1 0 auto;display:flex;flex-direction:column}
 .hl{position:absolute;left:0;top:0;width:36px;height:36px;opacity:0;background:rgba(244,160,127,.12);box-shadow:inset 0 0 0 1px rgba(244,160,127,.5),0 0 24px rgba(200,64,26,.28)}
 .hl.on{animation:hlFade 1.2s cubic-bezier(.2,.6,.3,1) forwards}
 @keyframes hlFade{0%{opacity:1}100%{opacity:0}}
+/* ── hero: full gradient ASCII horizon background ── */
+.hero-bg{background:#0B0F12}
+.hero-bg .glow,.hero-bg .tiles,.hero-bg .tile,.hero-bg .hl{display:none}
+canvas.asc{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero .hero-note{color:rgba(243,246,245,.78);text-shadow:0 1px 14px rgba(11,15,18,.95),0 0 4px rgba(11,15,18,.8)}
+
+section.hero .hello{color:#FFF1E8;font-weight:500;text-shadow:0 1px 10px rgba(90,24,6,.45)}
+section.hero .h1{color:#FFF6F0;text-shadow:0 2px 30px rgba(90,24,6,.35)}
+section.hero .h1 em{color:#0E1316;text-shadow:none}
+section.hero .hero-sub{color:rgba(255,244,236,.92);text-shadow:0 1px 14px rgba(90,24,6,.4)}
+section.hero .hero-sub b{color:#FFFFFF}
+section.hero .hero-note{color:rgba(255,244,236,.86);text-shadow:0 1px 12px rgba(40,10,4,.6)}
+section.hero .btn-white{background:#0E1316;color:#FFF6F0;box-shadow:0 18px 40px -16px rgba(14,19,22,.7)}
+section.hero .btn-white:hover{background:#FFF6F0;color:#0E1316}
+section.hero .wrap.hx-wrap{padding-bottom:64px}
+@media (max-width:760px){section.hero .wrap.hx-wrap{padding-bottom:48px}}
+
+section.hero .pf-gate{color:rgba(255,248,242,.9);font-weight:600;text-shadow:0 1px 10px rgba(70,16,4,.45)}
+section.hero .pf-gate.is-end{color:#FFFFFF}
+section.hero .pf-legend{color:rgba(255,248,242,.9);font-weight:600;text-shadow:0 1px 10px rgba(70,16,4,.45)}
+section.hero .pf-legend i{background:#FFF8F2}
+section.hero .pf-legend i.o{background:#0E1316;box-shadow:0 0 0 2px #FFFFFF,0 0 14px 3px rgba(255,255,255,.55)}
+
+section.hero .hero-note.proof{font-weight:500;letter-spacing:.01em;text-wrap:balance}
+section.hero .hero-note.proof::before{content:"";display:inline-block;vertical-align:middle;margin:-2px 10px 0 0;width:7px;height:7px;border-radius:50%;background:#FFF6F0;box-shadow:0 0 0 3px rgba(255,246,240,.22)}
+
+/* ── v12: light frosted nav while over the hero ── */
+.nav-in,.nav .wm,.nav .wm-b,.nav .btn-sm{transition:background-color .35s ease,border-color .35s ease,color .35s ease,box-shadow .35s ease}
+.nav.on-hero .nav-in{background:rgba(255,248,243,.84);border-color:rgba(255,255,255,.65);box-shadow:0 16px 40px -18px rgba(70,16,4,.55)}
+.nav.on-hero .wm,.nav.on-hero .wm:hover{color:#0E1316}
+.nav.on-hero .wm-b{color:rgba(14,19,22,.55)}
+.nav.on-hero .btn-white{background:#0E1316;color:#FFF6F0}
+.nav.on-hero .btn-white:hover{background:#C8401A;color:#fff}
+/* tighter vertical rhythm so the funnel lands inside the first screen */
+section.hero{padding-top:118px}
+section.hero .hero-in{gap:22px}
+section.hero .wrap.hx-wrap{margin-top:18px;padding-bottom:104px}
+section.hero .pf-stage{height:310px}
+section.hero .hero-note.proof{font-size:15.5px}
+/* soft hand-off into the light section below */
+.asc-fade{position:absolute;left:0;right:0;bottom:0;height:120px;pointer-events:none;background:linear-gradient(180deg,rgba(238,242,241,0) 0%,rgba(238,242,241,.55) 60%,#EEF2F1 100%)}
+@media (max-width:1100px){section.hero{padding-top:128px}}
+@media (max-width:760px){section.hero{padding-top:112px}section.hero .wrap.hx-wrap{margin-top:26px;padding-bottom:84px}section.hero .pf-stage{height:240px}.asc-fade{height:90px}}
+.asc-grain{position:absolute;inset:0;opacity:.09;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+
 .hero-in{display:flex;flex-direction:column;align-items:center;text-align:center;gap:28px}
 .hello{display:inline-flex;align-items:center;gap:10px;font-size:15.5px;color:rgba(243,246,245,.72)}
 .hello .ch{display:inline-block;white-space:pre;transition:color .25s ease,text-shadow .25s ease}
@@ -555,7 +600,7 @@ html{scroll-behavior:auto}
 @media (max-width:760px){
 .wrap.hx-wrap{margin-top:44px;padding-bottom:72px}
 .pf-stage{height:250px}
-.pf-gate{font-size:9.5px;letter-spacing:.1em}
+.pf-gate{letter-spacing:.1em}
 .pf-gate .l{display:none}.pf-gate .s{display:inline}
 .cp-list{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .cp-item{flex-direction:column;text-align:center;gap:10px}
@@ -571,6 +616,39 @@ canvas.df{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-eve
 .lite:has(> canvas.df)::before{display:none}
 .lite > canvas.df ~ .hl-layer{display:none}
 .lite > .wrap{position:relative;z-index:1}
+
+/* ── v13 · final CTA on the orange ASCII sky ── */
+.cta.dark{background:#B8461C}
+.cta.dark::before,.cta.dark::after{display:none}
+.cta-bg{position:absolute;inset:0;z-index:-1;pointer-events:none;background:#B8461C}
+.asc-fade-top{position:absolute;left:0;right:0;top:0;height:64px;pointer-events:none;background:linear-gradient(0deg,rgba(238,242,241,0) 0%,rgba(238,242,241,.18) 35%,rgba(238,242,241,.7) 75%,#EEF2F1 100%)}
+section.cta .kicker{color:rgba(255,244,236,.8)}
+section.cta .k-t{color:#FFF6F0;text-shadow:0 1px 10px rgba(90,24,6,.45)}
+section.cta .h2{color:#FFF6F0;text-shadow:0 2px 30px rgba(90,24,6,.35)}
+section.cta .h2 em{color:#0E1316;text-shadow:none}
+section.cta .cta-p{color:rgba(255,244,236,.92);text-shadow:0 1px 14px rgba(90,24,6,.4)}
+section.cta .btn{background:#0E1316;color:#FFF6F0;box-shadow:0 18px 40px -16px rgba(14,19,22,.7)}
+section.cta .btn:hover{background:#FFF6F0;color:#0E1316}
+/* ── v13 · dark sections: warm ink, rust glow, no teal ── */
+.dark{background:linear-gradient(180deg,#0E1115 0%,#121315 55%,#1A1512 100%)}
+.dark::after{background:rgba(200,64,26,.3)}
+.glow-left::after{background:rgba(200,64,26,.22)}
+.ab-path{background:linear-gradient(180deg,#0E1115,#1C1512)}
+/* ── v13 · funnel labels one step bigger ── */
+.pf-gate,.pf-legend{font-size:11.5px}
+@media (max-width:760px){.pf-gate,.pf-legend{font-size:10.5px}}
+/* ── v13 · logo keeps full strength on the light hero nav ── */
+.wm-mark stop{transition:stop-color .35s ease}
+.nav.on-hero .wm-mark #nxA stop:first-child{stop-color:#B0350E}
+.nav.on-hero .wm-mark #nxA stop:last-child{stop-color:#D9541F}
+.nav.on-hero .wm-mark #nxB stop:first-child{stop-color:#C8401A}
+.nav.on-hero .wm-mark #nxB stop:last-child{stop-color:#EC7442}
+.nav.on-hero .wm-mark path{opacity:1}
+.nav.on-hero .wm-mark{filter:drop-shadow(0 3px 8px rgba(160,40,10,.28))}
+.nav.on-hero .wm-b{color:rgba(14,19,22,.7)}
+/* ── v13 · shorter hero fade (no pink band) ── */
+.asc-fade{height:64px;background:linear-gradient(180deg,rgba(238,242,241,0) 0%,rgba(238,242,241,.18) 35%,rgba(238,242,241,.7) 75%,#EEF2F1 100%)}
+@media (max-width:760px){.asc-fade,.asc-fade-top{height:52px}}
 
 [hidden]{display:none !important}
 .dm-mini{position:absolute;inset:0;overflow:hidden;pointer-events:none}
@@ -595,6 +673,7 @@ canvas.df{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-eve
 <!-- 1 · HERO -->
 <section class="hero" aria-labelledby="hero-h">
 <div class="hero-bg" aria-hidden="true">
+<canvas class="asc"></canvas><span class="asc-grain"></span><span class="asc-fade"></span>
 <span class="glow g2"></span>
 <span class="glow g1"></span>
 <span class="glow g3"></span>
@@ -612,10 +691,10 @@ canvas.df{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-eve
 <div class="wrap hero-in">
 <p class="hello">For coaches and local businesses</p>
 <h1 id="hero-h" class="h1">Websites and funnels that get you <em>booked</em>.</h1>
-<p class="hero-sub">I build <b>funnels, landing pages and websites</b> that turn visitors into calls and bookings. The plan, the copy, the design and the follow-up emails all come from me, so nothing gets lost between <b>three different freelancers</b>.</p>
+<p class="hero-sub">I plan, write and build <b>funnels, landing pages and websites</b> that turn visitors into calls and bookings. All from one person.</p>
 <div class="hero-cta">
 <a class="btn btn-white beam" href="https://wa.me/919113290223?text=Hi%20Kiran%2C%20I%20saw%20your%20website%20and%20I%27d%20like%20to%20talk%20about%20a%20funnel%20for%20my%20business." target="_blank" rel="noopener" data-book>Let’s talk on WhatsApp<svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 11.6a8.4 8.4 0 01-12.3 7.4L3.5 20.5l1.5-4.5a8.4 8.4 0 1115.5-4.4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path><path d="M8.5 11.8h.01M12 11.8h.01M15.5 11.8h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path></svg></a>
-<p class="hero-note">Send me your current page, or just tell me what you sell. I’ll reply with what I’d change first.</p>
+<p class="hero-note proof">50+ funnels, landing pages and websites delivered</p>
 </div>
 </div>
 
@@ -865,7 +944,7 @@ canvas.df{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-eve
 </div>
 </article>
 </div>
-<p class="dm-note">Hover a project and choose “View demo” to open it in the live preview.</p>
+<p class="dm-note">Choose “View demo” on any project to open it in the live preview.</p>
 </div>
 </section>
 
@@ -1023,7 +1102,7 @@ canvas.df{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-eve
 
 <!-- 10 · FINAL BOOKING INVITATION -->
 <section class="cta dark" aria-labelledby="cta-h">
-<div class="hl-layer" aria-hidden="true"><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span><span class="hl"></span></div>
+<div class="cta-bg" aria-hidden="true"><canvas class="asc"></canvas><span class="asc-grain"></span><span class="asc-fade-top"></span></div>
 <div class="wrap cta-in">
 <p class="kicker"><span class="k-t">Get in touch</span></p>
 <h2 id="cta-h" class="h2">Send me your page. I’ll tell you <em>what I’d fix first</em>.</h2>
@@ -1075,7 +1154,6 @@ document.querySelectorAll('[data-mini]').forEach(box => {
 });
 
 (function(){ if (!window.matchMedia) return; var offs = [];
-
     // ── particle funnel ──
     (function (root) {
       var stage = root.querySelector('.pf-stage'); if (!stage) return;
@@ -1087,7 +1165,7 @@ document.querySelectorAll('[data-mini]').forEach(box => {
       var mouse = { x: -9999, y: -9999 };
       var sprite = document.createElement('canvas'); sprite.width = sprite.height = 64;
       (function () { var s = sprite.getContext('2d'), g = s.createRadialGradient(32, 32, 0, 32, 32, 32);
-        g.addColorStop(0, 'rgba(255,190,160,1)'); g.addColorStop(.25, 'rgba(244,160,127,.55)'); g.addColorStop(1, 'rgba(200,64,26,0)');
+        g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(.25, 'rgba(255,244,236,.55)'); g.addColorStop(1, 'rgba(255,236,224,0)');
         s.fillStyle = g; s.fillRect(0, 0, 64, 64); })();
       function half(u) { var a = .43, b = .028; if (u <= G[0]) return a; if (u >= .8) return b;
         var k = (u - G[0]) / (.8 - G[0]); k = 1 - Math.pow(1 - k, 1.7); return a + (b - a) * k; }
@@ -1127,7 +1205,7 @@ document.querySelectorAll('[data-mini]').forEach(box => {
       }
       function edge(sign) { ctx.beginPath(); for (var s = 0; s <= 72; s++) { var u = G[0] + (G[4] - G[0]) * s / 72, x = X(u), y = Y(u, sign); s ? ctx.lineTo(x, y) : ctx.moveTo(x, y); } ctx.stroke(); }
       function body() { ctx.beginPath(); for (var s = 0; s <= 72; s++) { var u = G[0] + (G[4] - G[0]) * s / 72; s ? ctx.lineTo(X(u), Y(u, -1)) : ctx.moveTo(X(u), Y(u, -1)); } for (s = 72; s >= 0; s--) { u = G[0] + (G[4] - G[0]) * s / 72; ctx.lineTo(X(u), Y(u, 1)); } ctx.closePath(); }
-      function tone(k, a) { return 'rgba(' + Math.round(243 + k) + ',' + Math.round(246 - 86 * k) + ',' + Math.round(245 - 118 * k) + ',' + a.toFixed(3) + ')'; }
+      function tone(k, a) { return 'rgba(255,250,246,' + Math.min(1, a * 1.15).toFixed(3) + ')'; }
       function ring(u, back, front, lw) {
         var ry = half(u) * (H - 26), rx = Math.max(1.5, ry * .24), cx = X(u), cy = (H - 26) / 2, k = Math.max(0, Math.min(1, (u - G[0]) / (.8 - G[0])));
         ctx.lineWidth = lw || 1;
@@ -1138,37 +1216,45 @@ document.querySelectorAll('[data-mini]').forEach(box => {
         ctx.clearRect(0, 0, W, H);
         var x0 = X(G[0]), x4 = X(G[4]), cy = (H - 26) / 2;
         // glass body: warm horizontal gradient + soft vertical sheen
-        var grd = ctx.createLinearGradient(x0, 0, x4, 0);
-        grd.addColorStop(0, 'rgba(243,246,245,.045)'); grd.addColorStop(.6, 'rgba(244,160,127,.045)'); grd.addColorStop(1, 'rgba(244,160,127,.16)');
+        // soft cast shadow on the orange below the glass
+        ctx.save(); ctx.translate(0, 28); ctx.filter = 'blur(26px)'; body(); ctx.fillStyle = 'rgba(66,14,3,.34)'; ctx.fill(); ctx.restore();
+        // frosted glass: lit from above, a little denser toward the exit
+        var top = cy - half(G[0]) * (H - 26), bot = cy + half(G[0]) * (H - 26);
+        var grd = ctx.createLinearGradient(0, top, 0, bot);
+        grd.addColorStop(0, 'rgba(255,250,246,.30)'); grd.addColorStop(.42, 'rgba(255,246,240,.12)'); grd.addColorStop(.78, 'rgba(255,240,232,.08)'); grd.addColorStop(1, 'rgba(255,246,240,.2)');
         body(); ctx.fillStyle = grd; ctx.fill();
+        var hz2 = ctx.createLinearGradient(x0, 0, x4, 0);
+        hz2.addColorStop(0, 'rgba(255,255,255,0)'); hz2.addColorStop(.75, 'rgba(255,248,242,.08)'); hz2.addColorStop(1, 'rgba(255,252,248,.32)');
+        body(); ctx.fillStyle = hz2; ctx.fill();
         ctx.save(); body(); ctx.clip();
         var sh = ctx.createLinearGradient(0, cy - half(G[0]) * (H - 26), 0, cy + half(G[0]) * (H - 26));
-        sh.addColorStop(0, 'rgba(255,255,255,.07)'); sh.addColorStop(.35, 'rgba(255,255,255,0)'); sh.addColorStop(.8, 'rgba(0,0,0,.10)'); sh.addColorStop(1, 'rgba(255,255,255,.03)');
+        sh.addColorStop(0, 'rgba(255,255,255,.22)'); sh.addColorStop(.18, 'rgba(255,255,255,0)'); sh.addColorStop(.82, 'rgba(90,20,6,.12)'); sh.addColorStop(1, 'rgba(90,20,6,.22)');
         ctx.fillStyle = sh; ctx.fillRect(x0 - 40, 0, x4 - x0 + 80, H);
         // contour rings (the funnel's wireframe skin)
-        for (var r = 1; r < 18; r++) { var q = r / 18, u = G[0] + (.8 - G[0]) * (1 - Math.pow(1 - q, 1.35)); ring(u, .035 + q * .05, .07 + q * .16, 1); }
+        for (var r = 1; r < 10; r++) { var q = r / 10, u = G[0] + (.8 - G[0]) * (1 - Math.pow(1 - q, 1.35)); ring(u, .05 + q * .05, .12 + q * .14, .8); }
         // long seams
-        ctx.lineWidth = 1; [-.55, 0, .55].forEach(function (v) { ctx.strokeStyle = v ? 'rgba(243,246,245,.045)' : 'rgba(243,246,245,.03)'; edge(v); });
+        ctx.lineWidth = 1; [-.55, 0, .55].forEach(function (v) { ctx.strokeStyle = 'rgba(255,250,246,.07)'; edge(v); });
         ctx.restore();
         // gate rings, slightly brighter
-        for (var g = 1; g < 4; g++) ring(G[g], .06, .26, 1.1);
+        for (var g = 1; g < 4; g++) ring(G[g], .1, .42, 1);
         // mouth rim
-        ring(G[0], .16, .42, 1.3);
+        ring(G[0], .3, .9, 1.5);
         // outer walls: gradient hairline + soft glow
         var eg = ctx.createLinearGradient(x0, 0, x4, 0);
-        eg.addColorStop(0, 'rgba(243,246,245,.34)'); eg.addColorStop(.55, 'rgba(244,190,165,.42)'); eg.addColorStop(1, 'rgba(244,160,127,.95)');
-        ctx.globalCompositeOperation = 'lighter';
-        ctx.strokeStyle = eg; ctx.globalAlpha = .12; ctx.lineWidth = 6; edge(-1); edge(1);
-        ctx.globalAlpha = 1; ctx.lineWidth = 1.25; edge(-1); edge(1);
+        eg.addColorStop(0, 'rgba(255,252,248,.9)'); eg.addColorStop(1, 'rgba(255,255,255,1)');
+        ctx.strokeStyle = eg; ctx.globalAlpha = .16; ctx.lineWidth = 7; edge(-1);
+        ctx.globalAlpha = 1; ctx.lineWidth = 1.7; edge(-1);
+        ctx.globalAlpha = .55; ctx.lineWidth = 1.1; edge(1);
+        ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'lighter';
         // light sweep travelling along the walls toward the client
         var per = 4.6, p = (t % per) / per, sx = x0 + (x4 - x0) * p;
         var sg = ctx.createLinearGradient(sx - 170, 0, sx + 24, 0);
-        sg.addColorStop(0, 'rgba(255,214,196,0)'); sg.addColorStop(.86, 'rgba(255,226,212,.95)'); sg.addColorStop(1, 'rgba(255,214,196,0)');
+        sg.addColorStop(0, 'rgba(255,255,255,0)'); sg.addColorStop(.86, 'rgba(255,255,255,.95)'); sg.addColorStop(1, 'rgba(255,255,255,0)');
         ctx.strokeStyle = sg; ctx.globalAlpha = .9; ctx.lineWidth = 1.6; edge(-1); edge(1);
         ctx.globalAlpha = .28; ctx.lineWidth = 7; edge(-1); edge(1);
         ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
         // gate ticks down to the labels
-        ctx.setLineDash([1, 5]); ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(243,246,245,.12)';
+        ctx.setLineDash([1, 5]); ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(255,248,242,.38)';
         for (g = 0; g < 4; g++) { var gx = X(G[g]); ctx.beginPath(); ctx.moveTo(gx, Y(G[g], 1) + 8); ctx.lineTo(gx, H - 22); ctx.stroke(); }
         ctx.setLineDash([]);
         // particles
@@ -1184,8 +1270,8 @@ document.querySelectorAll('[data-mini]').forEach(box => {
             ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = .22 + c * .5; var sz = 10 + c * 14;
             ctx.drawImage(sprite, x - sz / 2, y - sz / 2, sz, sz); ctx.globalCompositeOperation = 'source-over';
           }
-          ctx.globalAlpha = Math.max(0, p.a) * (p.leak ? .5 : .8);
-          ctx.fillStyle = c > 0 ? 'rgb(' + Math.round(243 + (244 - 243) * c) + ',' + Math.round(246 - 86 * c) + ',' + Math.round(245 - 118 * c) + ')' : (p.leak ? 'rgb(150,160,165)' : 'rgb(243,246,245)');
+          ctx.globalAlpha = Math.max(0, p.a) * (p.leak ? .55 : .92);
+          ctx.fillStyle = c > 0 ? '#FFFFFF' : (p.leak ? 'rgb(255,226,212)' : 'rgb(255,250,246)');
           ctx.beginPath(); ctx.arc(x, y, p.r + c * .8, 0, 6.2832); ctx.fill();
         }
         ctx.globalAlpha = 1;
@@ -1193,13 +1279,20 @@ document.querySelectorAll('[data-mini]').forEach(box => {
         ctx.globalCompositeOperation = 'lighter';
         var R = 34 + pulse * 10; ctx.globalAlpha = .55 + pulse * .35; ctx.drawImage(sprite, ox - R, oy - R, R * 2, R * 2);
         ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1;
-        for (var k = 0; k < rings.length; k++) { var q = rings[k] / 1.3; ctx.strokeStyle = 'rgba(244,160,127,' + (.5 * (1 - q)) + ')'; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.arc(ox, oy, 8 + q * 34, 0, 6.2832); ctx.stroke(); }
-        ctx.fillStyle = '#C8401A'; ctx.beginPath(); ctx.arc(ox, oy, 6.5 + pulse * 1.5, 0, 6.2832); ctx.fill();
-        ctx.fillStyle = '#FFE3D6'; ctx.beginPath(); ctx.arc(ox, oy, 2.6, 0, 6.2832); ctx.fill();
+        for (var k = 0; k < rings.length; k++) { var q = rings[k] / 1.3; ctx.strokeStyle = 'rgba(255,255,255,' + (.8 * (1 - q)) + ')'; ctx.lineWidth = 1.3; ctx.beginPath(); ctx.arc(ox, oy, 8 + q * 34, 0, 6.2832); ctx.stroke(); }
+        ctx.fillStyle = '#FFFFFF'; ctx.beginPath(); ctx.arc(ox, oy, 9 + pulse * 1.5, 0, 6.2832); ctx.fill();
+        ctx.fillStyle = '#0E1316'; ctx.beginPath(); ctx.arc(ox, oy, 4.2, 0, 6.2832); ctx.fill();
       }
       function loop(now) { var dt = Math.min(.05, (now - (last || now)) / 1000); last = now; step(dt); draw(); raf = run ? requestAnimationFrame(loop) : 0; }
       function mm(e) { var r = stage.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; }
       function ml() { mouse.x = mouse.y = -9999; }
+      stage.__inside = function (px, py) {
+        if (!W) return false; var cy = (H - 26) / 2, u = (px - pad) / (W - pad * 2);
+        var ry0 = half(G[0]) * (H - 26), x0 = X(G[0]), rx0 = Math.max(1.5, ry0 * .24);
+        if (px < x0 - rx0 - 6 || u > G[4] + .012) return false;
+        if (px < x0) { var e = (px - x0) / (rx0 + 6), f = (py - cy) / (ry0 + 8); return e * e + f * f <= 1; }
+        return Math.abs(py - cy) <= half(u) * (H - 26) + 9;
+      };
       size();
       var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (still) { for (var s = 0; s < 200; s++) step(.05); draw(); }
@@ -1293,27 +1386,229 @@ document.querySelectorAll('[data-mini]').forEach(box => {
         offs.push(function () { cancelAnimationFrame(raf); io.disconnect(); ro.disconnect(); sec.removeEventListener('mousemove', mv); sec.removeEventListener('mouseleave', lv); sec.removeEventListener('click', tap); sec.removeEventListener('mouseenter', en); });
       });
     })();
-    // ── hero top line: letters warm to orange and glow as the cursor gets close ──
+
+    // ── hero background: gradient ASCII sky (warm white to orange) over a dark dome that holds the funnel ──
     (function () {
-      var p = document.querySelector('.hello'); if (!p || !matchMedia('(hover: hover)').matches) return;
-      var T = p.textContent, zone = p.closest('section') || document.body, raf = 0, mx = -1e4, my = -1e4;
-      p.textContent = '';
-      var sr = document.createElement('span'); sr.textContent = T; sr.style.cssText = 'position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap'; p.appendChild(sr);
-      var wrap = document.createElement('span'); wrap.setAttribute('aria-hidden', 'true'); p.appendChild(wrap);
-      var chs = T.split('').map(function (c) { var s = document.createElement('span'); s.className = 'ch'; s.textContent = c; wrap.appendChild(s); return s; });
-      function paint() {
-        raf = 0;
-        chs.forEach(function (c) {
-          var r = c.getBoundingClientRect(), d = Math.hypot(r.left + r.width / 2 - mx, r.top + r.height / 2 - my), f = Math.max(0, 1 - d / 150); f = f * f * (3 - 2 * f);
-          if (f < .01) { c.style.color = ''; c.style.textShadow = ''; return; }
-          c.style.color = 'rgba(' + Math.round(243 + f) + ',' + Math.round(246 - 86 * f) + ',' + Math.round(245 - 118 * f) + ',' + (.72 + .28 * f).toFixed(2) + ')';
-          c.style.textShadow = '0 0 ' + (14 * f).toFixed(1) + 'px rgba(244,160,127,' + (.55 * f).toFixed(2) + ')';
-        });
+      var cv = document.querySelector('.hero canvas.asc'); if (!cv) return;
+      var hero = cv.closest('.hero'), ctx = cv.getContext('2d');
+      var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var CH = ' =+xX0S8#@'.split(''), NC = CH.length, LV = 24;
+      var SKY = [[0, [11, 12, 14]], [.08, [38, 14, 8]], [.2, [92, 26, 9]], [.32, [146, 42, 14]], [.42, [176, 54, 18]], [.55, [204, 72, 28]], [.7, [228, 108, 60]], [.85, [244, 162, 124]], [1, [253, 226, 212]]];
+      var W = 0, H = 0, cs = 18, cols = 0, rows = 0, dpr = 1, atlas = null, under = null, seed = [], mask = null, vis = false, run = false, raf = 0, t0 = 0, last = 0, hc = .56;
+      var m = { x: -1e4, y: -1e4, k: 0, tk: 0 }, waves = [];
+      function ramp(P, v) { v = Math.max(0, Math.min(1, v)); for (var i = 1; i < P.length; i++) if (v <= P[i][0]) { var a = P[i - 1], b = P[i], f = (v - a[0]) / (b[0] - a[0]); return [a[1][0] + (b[1][0] - a[1][0]) * f, a[1][1] + (b[1][1] - a[1][1]) * f, a[1][2] + (b[1][2] - a[1][2]) * f]; } return P[P.length - 1][1]; }
+      function hz(nx) { var q = (nx - .5) * 2; return hc + (W < 760 ? .12 : .1) * q * q; }   // dome: highest in the middle, falling away to the sides
+      function field(nx, ny) { // one continuous sky: hot spot at the top centre, deepening to rust at the bottom, soft side vignette
+        var hx = (nx - .5) / .26, hy = ny / .16, hot = Math.exp(-hx * hx - hy * hy);
+        var vx = (nx - .5) * 2, vig = 1 - .1 * vx * vx;
+        return Math.min(1, (.33 + .14 * (1 - ny) + .52 * hot) * vig);
       }
-      function mv(e) { mx = e.clientX; my = e.clientY; if (!raf) raf = requestAnimationFrame(paint); }
-      function lv() { mx = my = -1e4; if (!raf) raf = requestAnimationFrame(paint); }
-      zone.addEventListener('mousemove', mv); zone.addEventListener('mouseleave', lv);
-      offs.push(function () { cancelAnimationFrame(raf); zone.removeEventListener('mousemove', mv); zone.removeEventListener('mouseleave', lv); });
+      function buildUnder() {
+        var s = 2, w = Math.max(2, Math.ceil(W / s)), h = Math.max(2, Math.ceil(H / s));
+        under = document.createElement('canvas'); under.width = w; under.height = h;
+        var u = under.getContext('2d'), img = u.createImageData(w, h), p = img.data;
+        for (var y = 0; y < h; y++) for (var x = 0; x < w; x++) { var c = ramp(SKY, field((x + .5) / w, (y + .5) / h)), k = (y * w + x) * 4; p[k] = c[0]; p[k + 1] = c[1]; p[k + 2] = c[2]; p[k + 3] = 255; }
+        u.putImageData(img, 0, 0);
+        var u2 = document.createElement('canvas'); u2.width = w; u2.height = h; var g2 = u2.getContext('2d'); g2.filter = 'blur(2px)'; g2.drawImage(under, 0, 0); under = u2;
+      }
+      function buildAtlas() { // glyphs are a lighter tint of the sky behind them, like the reference
+        atlas = document.createElement('canvas'); atlas.width = Math.ceil(cs * NC * dpr); atlas.height = Math.ceil(cs * LV * dpr);
+        var a = atlas.getContext('2d'); a.scale(dpr, dpr); a.textAlign = 'center'; a.textBaseline = 'middle';
+        a.font = '600 ' + Math.round(cs * .76) + 'px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace';
+        for (var l = 0; l < LV; l++) { var v = (l + .5) / LV, b = ramp(SKY, Math.min(1, v * 1.08 + .1)), mix = .26 + .36 * v, c = b.map(function (x) { return Math.round(x + (255 - x) * mix); }), al = .5 + .42 * v;
+          if (v < .2) { c = [204, 72, 28]; al = .2 + v; }
+          a.fillStyle = 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + al.toFixed(3) + ')';
+          for (var k = 1; k < NC; k++) a.fillText(CH[k], k * cs + cs / 2, l * cs + cs / 2 + .5); }
+      }
+      function buildMask() {
+        var o = cv.getBoundingClientRect(), rects = [], rg = document.createRange();
+        var tw = document.createTreeWalker(hero, NodeFilter.SHOW_TEXT, { acceptNode: function (n) { return /\S/.test(n.nodeValue) && n.parentElement && !n.parentElement.closest('.hero-bg,script,style') ? 1 : 2; } });
+        for (var n = tw.nextNode(); n; n = tw.nextNode()) { rg.selectNodeContents(n); var rs = rg.getClientRects(); for (var j = 0; j < rs.length; j++) { var q = rs[j]; if (q.width && q.height) rects.push([q.left - o.left, q.top - o.top, q.right - o.left, q.bottom - o.top]); } }
+        [].slice.call(hero.querySelectorAll('.btn')).forEach(function (b) { var q = b.getBoundingClientRect(); rects.push([q.left - o.left - 4, q.top - o.top - 4, q.right - o.left + 4, q.bottom - o.top + 4]); });
+        // hard cut-out around each line of text and the button (same treatment as the funnel), with a hairline feather
+        mask = new Float32Array(cols * rows); var PX = 7, PY = 3;
+        for (var r = 0; r < rows; r++) for (var c = 0; c < cols; c++) { var px = c * cs + cs / 2, py = r * cs + cs / 2, best = 1e9;
+          for (var i = 0; i < rects.length; i++) { var q2 = rects[i], dx = Math.max(q2[0] - PX - px, 0, px - q2[2] - PX), dy = Math.max(q2[1] - PY - py, 0, py - q2[3] - PY), d = dx * dx + dy * dy; if (d < best) best = d; }
+          var t = Math.min(1, Math.sqrt(best) / (cs * .6)); mask[r * cols + c] = best === 0 ? 0 : .55 + .45 * t; }
+      }
+      function place() { // top of the dome sits between the CTA note and the funnel
+        var o = hero.getBoundingClientRect(), a = hero.querySelector('.hero-note'), b = hero.querySelector('.pfn');
+        if (a && b && o.height) { var y = (a.getBoundingClientRect().bottom * .55 + b.getBoundingClientRect().top * .45 - o.top) / o.height; if (y > .2 && y < .9) hc = y; }
+        var pf = hero.querySelector('.pf-stage'); inside = null;
+        if (pf && pf.__inside && cols) { var pr = pf.getBoundingClientRect(); inside = new Uint8Array(cols * rows);
+          for (var rr = 0; rr < rows; rr++) for (var cc = 0; cc < cols; cc++) if (pf.__inside(cc * cs + cs / 2 + o.left - pr.left, rr * cs + cs / 2 + o.top - pr.top)) inside[rr * cols + cc] = 1; }
+        var st = hero.querySelector('.pfn'); if (st) { var sr = st.getBoundingClientRect(); stage = [sr.left - o.left + 60, sr.top - o.top + 10, sr.right - o.left - 60, sr.bottom - o.top - 60]; }
+      }
+      function size() {
+        var r = hero.getBoundingClientRect(); W = r.width; H = r.height; if (!W || !H) return; dpr = Math.min(devicePixelRatio || 1, 2);
+        cs = W < 760 ? 15 : 18; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        cols = Math.ceil(W / cs); rows = Math.ceil(H / cs); seed = []; for (var i = 0; i < cols * rows; i++) seed.push(Math.random());
+        place(); buildUnder(); buildAtlas(); buildMask(); draw(performance.now());
+      }
+      function refresh() { place(); buildUnder(); buildMask(); if (!run) draw(performance.now()); }
+      var stage = null, inside = null;
+      function ci0(c, r) { // keep the funnel's stage clear of glyphs
+        if (!stage) return false; var x = c * cs + cs / 2, y = r * cs + cs / 2;
+        return x > stage[0] && x < stage[2] && y > stage[1] && y < stage[3];
+      }
+      function draw(now) {
+        if (!under) return;
+        var t = (now - t0) / 1000, intro = still ? 1 : Math.min(1, t / 1.8), R = Math.max(110, W * .1);
+        ctx.imageSmoothingEnabled = true; ctx.drawImage(under, 0, 0, W, H);
+        m.k += (m.tk - m.k) * .12;
+        for (var w = waves.length - 1; w >= 0; w--) { waves[w].r += 16; waves[w].a *= .965; if (waves[w].a < .03) waves.splice(w, 1); }
+        var tick = Math.floor(t * 9);
+        for (var r = 0; r < rows; r++) { var y = r * cs, ny = (y + cs / 2) / H;
+          for (var c = 0; c < cols; c++) { var x = c * cs, nx = (x + cs / 2) / W, i = r * cols + c, s = seed[i];
+            var v = field(nx, ny), d = ny; if (ny < .17) v *= .58 + .42 * (ny / .17);
+            var n = Math.sin(nx * 6.1 + t * .5 + Math.sin(ny * 4.3 - t * .35) * 1.5) * Math.sin(ny * 8.4 - t * .42 + nx * 2.7);
+            v = v * (.86 + .2 * n);
+            if (inside && inside[i]) continue;
+            if (s > .9) v *= .7;
+            if (intro < 1) v *= Math.max(0, Math.min(1, intro * 2.2 - d * 1.2));
+            var dx = x + cs / 2 - m.x, dy = y + cs / 2 - m.y, md = Math.sqrt(dx * dx + dy * dy), near = 0;
+            if (m.k > .01 && md < R) { near = (1 - md / R) * m.k; v += near * .25; }
+            for (w = 0; w < waves.length; w++) { var wd = Math.abs(Math.sqrt((x - waves[w].x) * (x - waves[w].x) + (y - waves[w].y) * (y - waves[w].y)) - waves[w].r); if (wd < 46) v += (1 - wd / 46) * .4 * waves[w].a; }
+            if (mask) { if (!mask[i]) continue; v *= mask[i]; }
+            if (v < .06) continue;
+            v = Math.min(1, v);
+            var ci = Math.min(NC - 1, Math.max(1, Math.round(v * (NC - 1))));
+            var h = ((i * 2654435761 + tick * 40503) >>> 0) % 1000 / 1000;
+            if (h < .03) ci = Math.max(1, Math.min(NC - 1, ci + (h < .015 ? 1 : -1)));
+            if (near > .15 && h < near * .9) ci = 1 + ((h * 997) | 0) % (NC - 1);
+            ctx.drawImage(atlas, ci * cs * dpr, Math.min(LV - 1, (v * LV) | 0) * cs * dpr, cs * dpr, cs * dpr, x, y, cs, cs);
+          } }
+      }
+      function loop(now) { if (!vis || still) { run = false; return; } if (now - last > (W < 760 ? 50 : 33)) { last = now; draw(now); } raf = requestAnimationFrame(loop); }
+      function kick() { if (!run && vis && !still) { run = true; raf = requestAnimationFrame(loop); } }
+      function mv(e) { var r = cv.getBoundingClientRect(); m.x = e.clientX - r.left; m.y = e.clientY - r.top; m.tk = 1; }
+      function lv() { m.tk = 0; }
+      function dn(e) { if (still) return; var r = cv.getBoundingClientRect(); waves.push({ x: e.clientX - r.left, y: e.clientY - r.top, r: 0, a: 1 }); }
+      hero.addEventListener('mousemove', mv); hero.addEventListener('mouseleave', lv); hero.addEventListener('pointerdown', dn);
+      var io = new IntersectionObserver(function (es) { vis = es[0].isIntersecting; if (vis) kick(); }, { threshold: 0 }); io.observe(hero);
+      var ro = new ResizeObserver(size); ro.observe(hero);
+      t0 = performance.now(); size();
+      var mt = [setTimeout(refresh, 1600), setTimeout(refresh, 3200)];
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
+      offs.push(function () { mt.forEach(clearTimeout); cancelAnimationFrame(raf); io.disconnect(); ro.disconnect(); hero.removeEventListener('mousemove', mv); hero.removeEventListener('mouseleave', lv); hero.removeEventListener('pointerdown', dn); });
+    })();
+
+    // ── nav turns light while it sits over the orange hero ──
+    (function () {
+      var nav = document.querySelector('.nav'), hero = document.querySelector('.hero'); if (!nav || !hero) return;
+      var tick = false;
+      function upd() { tick = false; nav.classList.toggle('on-hero', hero.getBoundingClientRect().bottom > 90); }
+      function on() { if (!tick) { tick = true; requestAnimationFrame(upd); } }
+      addEventListener('scroll', on, { passive: true }); addEventListener('resize', on); upd();
+      offs.push(function () { removeEventListener('scroll', on); removeEventListener('resize', on); nav.classList.remove('on-hero'); });
+    })();
+
+    // ── final CTA background: the same ASCII sky as the hero ──
+    (function () {
+      var cv = document.querySelector('.cta canvas.asc'); if (!cv) return;
+      var hero = cv.closest('.cta'), ctx = cv.getContext('2d');
+      var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var CH = ' =+xX0S8#@'.split(''), NC = CH.length, LV = 24;
+      var SKY = [[0, [11, 12, 14]], [.08, [38, 14, 8]], [.2, [92, 26, 9]], [.32, [146, 42, 14]], [.42, [176, 54, 18]], [.55, [204, 72, 28]], [.7, [228, 108, 60]], [.85, [244, 162, 124]], [1, [253, 226, 212]]];
+      var W = 0, H = 0, cs = 18, cols = 0, rows = 0, dpr = 1, atlas = null, under = null, seed = [], mask = null, vis = false, run = false, raf = 0, t0 = 0, last = 0, hc = .56;
+      var m = { x: -1e4, y: -1e4, k: 0, tk: 0 }, waves = [];
+      function ramp(P, v) { v = Math.max(0, Math.min(1, v)); for (var i = 1; i < P.length; i++) if (v <= P[i][0]) { var a = P[i - 1], b = P[i], f = (v - a[0]) / (b[0] - a[0]); return [a[1][0] + (b[1][0] - a[1][0]) * f, a[1][1] + (b[1][1] - a[1][1]) * f, a[1][2] + (b[1][2] - a[1][2]) * f]; } return P[P.length - 1][1]; }
+      function hz(nx) { var q = (nx - .5) * 2; return hc + (W < 760 ? .12 : .1) * q * q; }   // dome: highest in the middle, falling away to the sides
+      function field(nx, ny) { // one continuous sky: hot spot at the top centre, deepening to rust at the bottom, soft side vignette
+        var hx = (nx - .5) / .3, hy = (ny - .06) / .2, hot = Math.exp(-hx * hx - hy * hy);
+        var vx = (nx - .5) * 2, vig = 1 - .1 * vx * vx;
+        return Math.min(1, (.33 + .14 * (1 - ny) + .52 * hot) * vig);
+      }
+      function buildUnder() {
+        var s = 2, w = Math.max(2, Math.ceil(W / s)), h = Math.max(2, Math.ceil(H / s));
+        under = document.createElement('canvas'); under.width = w; under.height = h;
+        var u = under.getContext('2d'), img = u.createImageData(w, h), p = img.data;
+        for (var y = 0; y < h; y++) for (var x = 0; x < w; x++) { var c = ramp(SKY, field((x + .5) / w, (y + .5) / h)), k = (y * w + x) * 4; p[k] = c[0]; p[k + 1] = c[1]; p[k + 2] = c[2]; p[k + 3] = 255; }
+        u.putImageData(img, 0, 0);
+        var u2 = document.createElement('canvas'); u2.width = w; u2.height = h; var g2 = u2.getContext('2d'); g2.filter = 'blur(2px)'; g2.drawImage(under, 0, 0); under = u2;
+      }
+      function buildAtlas() { // glyphs are a lighter tint of the sky behind them, like the reference
+        atlas = document.createElement('canvas'); atlas.width = Math.ceil(cs * NC * dpr); atlas.height = Math.ceil(cs * LV * dpr);
+        var a = atlas.getContext('2d'); a.scale(dpr, dpr); a.textAlign = 'center'; a.textBaseline = 'middle';
+        a.font = '600 ' + Math.round(cs * .76) + 'px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace';
+        for (var l = 0; l < LV; l++) { var v = (l + .5) / LV, b = ramp(SKY, Math.min(1, v * 1.08 + .1)), mix = .26 + .36 * v, c = b.map(function (x) { return Math.round(x + (255 - x) * mix); }), al = .5 + .42 * v;
+          if (v < .2) { c = [204, 72, 28]; al = .2 + v; }
+          a.fillStyle = 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + al.toFixed(3) + ')';
+          for (var k = 1; k < NC; k++) a.fillText(CH[k], k * cs + cs / 2, l * cs + cs / 2 + .5); }
+      }
+      function buildMask() {
+        var o = cv.getBoundingClientRect(), rects = [], rg = document.createRange();
+        var tw = document.createTreeWalker(hero, NodeFilter.SHOW_TEXT, { acceptNode: function (n) { return /\S/.test(n.nodeValue) && n.parentElement && !n.parentElement.closest('.cta-bg,script,style') ? 1 : 2; } });
+        for (var n = tw.nextNode(); n; n = tw.nextNode()) { rg.selectNodeContents(n); var rs = rg.getClientRects(); for (var j = 0; j < rs.length; j++) { var q = rs[j]; if (q.width && q.height) rects.push([q.left - o.left, q.top - o.top, q.right - o.left, q.bottom - o.top]); } }
+        [].slice.call(hero.querySelectorAll('.btn')).forEach(function (b) { var q = b.getBoundingClientRect(); rects.push([q.left - o.left - 4, q.top - o.top - 4, q.right - o.left + 4, q.bottom - o.top + 4]); });
+        // hard cut-out around each line of text and the button (same treatment as the funnel), with a hairline feather
+        mask = new Float32Array(cols * rows); var PX = 7, PY = 3;
+        for (var r = 0; r < rows; r++) for (var c = 0; c < cols; c++) { var px = c * cs + cs / 2, py = r * cs + cs / 2, best = 1e9;
+          for (var i = 0; i < rects.length; i++) { var q2 = rects[i], dx = Math.max(q2[0] - PX - px, 0, px - q2[2] - PX), dy = Math.max(q2[1] - PY - py, 0, py - q2[3] - PY), d = dx * dx + dy * dy; if (d < best) best = d; }
+          var t = Math.min(1, Math.sqrt(best) / (cs * .6)); mask[r * cols + c] = best === 0 ? 0 : .55 + .45 * t; }
+      }
+      function place() { // top of the dome sits between the CTA note and the funnel
+        var o = hero.getBoundingClientRect(), a = hero.querySelector('.hero-note'), b = hero.querySelector('.pfn');
+        if (a && b && o.height) { var y = (a.getBoundingClientRect().bottom * .55 + b.getBoundingClientRect().top * .45 - o.top) / o.height; if (y > .2 && y < .9) hc = y; }
+        var pf = hero.querySelector('.pf-stage'); inside = null;
+        if (pf && pf.__inside && cols) { var pr = pf.getBoundingClientRect(); inside = new Uint8Array(cols * rows);
+          for (var rr = 0; rr < rows; rr++) for (var cc = 0; cc < cols; cc++) if (pf.__inside(cc * cs + cs / 2 + o.left - pr.left, rr * cs + cs / 2 + o.top - pr.top)) inside[rr * cols + cc] = 1; }
+        var st = hero.querySelector('.pfn'); if (st) { var sr = st.getBoundingClientRect(); stage = [sr.left - o.left + 60, sr.top - o.top + 10, sr.right - o.left - 60, sr.bottom - o.top - 60]; }
+      }
+      function size() {
+        var r = hero.getBoundingClientRect(); W = r.width; H = r.height; if (!W || !H) return; dpr = Math.min(devicePixelRatio || 1, 2);
+        cs = W < 760 ? 15 : 18; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        cols = Math.ceil(W / cs); rows = Math.ceil(H / cs); seed = []; for (var i = 0; i < cols * rows; i++) seed.push(Math.random());
+        place(); buildUnder(); buildAtlas(); buildMask(); draw(performance.now());
+      }
+      function refresh() { place(); buildUnder(); buildMask(); if (!run) draw(performance.now()); }
+      var stage = null, inside = null;
+      function ci0(c, r) { // keep the funnel's stage clear of glyphs
+        if (!stage) return false; var x = c * cs + cs / 2, y = r * cs + cs / 2;
+        return x > stage[0] && x < stage[2] && y > stage[1] && y < stage[3];
+      }
+      function draw(now) {
+        if (!under) return;
+        var t = (now - t0) / 1000, intro = still ? 1 : Math.min(1, t / 1.8), R = Math.max(110, W * .1);
+        ctx.imageSmoothingEnabled = true; ctx.drawImage(under, 0, 0, W, H);
+        m.k += (m.tk - m.k) * .12;
+        for (var w = waves.length - 1; w >= 0; w--) { waves[w].r += 16; waves[w].a *= .965; if (waves[w].a < .03) waves.splice(w, 1); }
+        var tick = Math.floor(t * 9);
+        for (var r = 0; r < rows; r++) { var y = r * cs, ny = (y + cs / 2) / H;
+          for (var c = 0; c < cols; c++) { var x = c * cs, nx = (x + cs / 2) / W, i = r * cols + c, s = seed[i];
+            var v = field(nx, ny), d = ny; if (ny < .17) v *= .58 + .42 * (ny / .17);
+            var n = Math.sin(nx * 6.1 + t * .5 + Math.sin(ny * 4.3 - t * .35) * 1.5) * Math.sin(ny * 8.4 - t * .42 + nx * 2.7);
+            v = v * (.86 + .2 * n);
+            if (inside && inside[i]) continue;
+            if (s > .9) v *= .7;
+            if (intro < 1) v *= Math.max(0, Math.min(1, intro * 2.2 - d * 1.2));
+            var dx = x + cs / 2 - m.x, dy = y + cs / 2 - m.y, md = Math.sqrt(dx * dx + dy * dy), near = 0;
+            if (m.k > .01 && md < R) { near = (1 - md / R) * m.k; v += near * .25; }
+            for (w = 0; w < waves.length; w++) { var wd = Math.abs(Math.sqrt((x - waves[w].x) * (x - waves[w].x) + (y - waves[w].y) * (y - waves[w].y)) - waves[w].r); if (wd < 46) v += (1 - wd / 46) * .4 * waves[w].a; }
+            if (mask) { if (!mask[i]) continue; v *= mask[i]; }
+            if (v < .06) continue;
+            v = Math.min(1, v);
+            var ci = Math.min(NC - 1, Math.max(1, Math.round(v * (NC - 1))));
+            var h = ((i * 2654435761 + tick * 40503) >>> 0) % 1000 / 1000;
+            if (h < .03) ci = Math.max(1, Math.min(NC - 1, ci + (h < .015 ? 1 : -1)));
+            if (near > .15 && h < near * .9) ci = 1 + ((h * 997) | 0) % (NC - 1);
+            ctx.drawImage(atlas, ci * cs * dpr, Math.min(LV - 1, (v * LV) | 0) * cs * dpr, cs * dpr, cs * dpr, x, y, cs, cs);
+          } }
+      }
+      function loop(now) { if (!vis || still) { run = false; return; } if (now - last > (W < 760 ? 50 : 33)) { last = now; draw(now); } raf = requestAnimationFrame(loop); }
+      function kick() { if (!run && vis && !still) { run = true; raf = requestAnimationFrame(loop); } }
+      function mv(e) { var r = cv.getBoundingClientRect(); m.x = e.clientX - r.left; m.y = e.clientY - r.top; m.tk = 1; }
+      function lv() { m.tk = 0; }
+      function dn(e) { if (still) return; var r = cv.getBoundingClientRect(); waves.push({ x: e.clientX - r.left, y: e.clientY - r.top, r: 0, a: 1 }); }
+      hero.addEventListener('mousemove', mv); hero.addEventListener('mouseleave', lv); hero.addEventListener('pointerdown', dn);
+      var io = new IntersectionObserver(function (es) { vis = es[0].isIntersecting; if (vis) kick(); }, { threshold: 0 }); io.observe(hero);
+      var ro = new ResizeObserver(size); ro.observe(hero);
+      var sq = 0; function onsc() { if (!vis || sq || !cols) return; sq = requestAnimationFrame(function () { sq = 0; buildMask(); if (!run) draw(performance.now()); }); }
+      addEventListener('scroll', onsc, { passive: true }); offs.push(function () { removeEventListener('scroll', onsc); cancelAnimationFrame(sq); });
+      t0 = performance.now(); size();
+      var mt = [setTimeout(refresh, 1600), setTimeout(refresh, 3200)];
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
+      offs.push(function () { mt.forEach(clearTimeout); cancelAnimationFrame(raf); io.disconnect(); ro.disconnect(); hero.removeEventListener('mousemove', mv); hero.removeEventListener('mouseleave', lv); hero.removeEventListener('pointerdown', dn); });
     })();
 })();
 
@@ -1321,7 +1616,7 @@ document.querySelectorAll('[data-mini]').forEach(box => {
 (function(){
   if(!window.matchMedia) return;
   var still=matchMedia('(prefers-reduced-motion: reduce)').matches, touch=matchMedia('(hover: none)').matches;
-  if(!still&&!touch) document.querySelectorAll('.hero, .dark').forEach(function(zone){
+  if(!still&&!touch) document.querySelectorAll('.dark').forEach(function(zone){
     var layer=zone.querySelector(':scope > .hero-bg, :scope > .hl-layer'); if(!layer) return;
     var cells=[].slice.call(layer.querySelectorAll('.hl')), i=0, last='';
     zone.addEventListener('mousemove',function(e){
